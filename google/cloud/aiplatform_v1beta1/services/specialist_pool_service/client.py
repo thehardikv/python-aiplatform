@@ -126,6 +126,22 @@ class SpecialistPoolServiceClient(metaclass=SpecialistPoolServiceClientMeta):
     )
 
     @classmethod
+    def from_service_account_info(cls, info: dict, *args, **kwargs):
+        """Creates an instance of this client using the provided credentials info.
+
+        Args:
+            info (dict): The service account private key info.
+            args: Additional arguments to pass to the constructor.
+            kwargs: Additional arguments to pass to the constructor.
+
+        Returns:
+            SpecialistPoolServiceClient: The constructed client.
+        """
+        credentials = service_account.Credentials.from_service_account_info(info)
+        kwargs["credentials"] = credentials
+        return cls(*args, **kwargs)
+
+    @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
         """Creates an instance of this client using the provided credentials
         file.
@@ -137,7 +153,7 @@ class SpecialistPoolServiceClient(metaclass=SpecialistPoolServiceClientMeta):
             kwargs: Additional arguments to pass to the constructor.
 
         Returns:
-            {@api.name}: The constructed client.
+            SpecialistPoolServiceClient: The constructed client.
         """
         credentials = service_account.Credentials.from_service_account_file(filename)
         kwargs["credentials"] = credentials
@@ -245,10 +261,10 @@ class SpecialistPoolServiceClient(metaclass=SpecialistPoolServiceClientMeta):
                 credentials identify the application to the service; if none
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
-            transport (Union[str, ~.SpecialistPoolServiceTransport]): The
+            transport (Union[str, SpecialistPoolServiceTransport]): The
                 transport to use. If set to None, a transport is chosen
                 automatically.
-            client_options (client_options_lib.ClientOptions): Custom options for the
+            client_options (google.api_core.client_options.ClientOptions): Custom options for the
                 client. It won't take effect if a ``transport`` instance is provided.
                 (1) The ``api_endpoint`` property can be used to override the
                 default endpoint provided by the client. GOOGLE_API_USE_MTLS_ENDPOINT
@@ -359,19 +375,21 @@ class SpecialistPoolServiceClient(metaclass=SpecialistPoolServiceClientMeta):
         r"""Creates a SpecialistPool.
 
         Args:
-            request (:class:`~.specialist_pool_service.CreateSpecialistPoolRequest`):
+            request (google.cloud.aiplatform_v1beta1.types.CreateSpecialistPoolRequest):
                 The request object. Request message for
                 ``SpecialistPoolService.CreateSpecialistPool``.
-            parent (:class:`str`):
+            parent (str):
                 Required. The parent Project name for the new
                 SpecialistPool. The form is
                 ``projects/{project}/locations/{location}``.
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            specialist_pool (:class:`~.gca_specialist_pool.SpecialistPool`):
+            specialist_pool (google.cloud.aiplatform_v1beta1.types.SpecialistPool):
                 Required. The SpecialistPool to
                 create.
+
                 This corresponds to the ``specialist_pool`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -383,19 +401,17 @@ class SpecialistPoolServiceClient(metaclass=SpecialistPoolServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.ga_operation.Operation:
+            google.api_core.operation.Operation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:`~.gca_specialist_pool.SpecialistPool`:
-                SpecialistPool represents customers' own workforce to
-                work on their data labeling jobs. It includes a group of
-                specialist managers who are responsible for managing the
-                labelers in this pool as well as customers' data
-                labeling jobs associated with this pool. Customers
-                create specialist pool as well as start data labeling
-                jobs on Cloud, managers and labelers work with the jobs
-                using CrowdCompute console.
+                The result type for the operation will be :class:`google.cloud.aiplatform_v1beta1.types.SpecialistPool` SpecialistPool represents customers' own workforce to work on their data
+                   labeling jobs. It includes a group of specialist
+                   managers who are responsible for managing the
+                   labelers in this pool as well as customers' data
+                   labeling jobs associated with this pool. Customers
+                   create specialist pool as well as start data labeling
+                   jobs on Cloud, managers and labelers work with the
+                   jobs using CrowdCompute console.
 
         """
         # Create or coerce a protobuf request object.
@@ -459,14 +475,15 @@ class SpecialistPoolServiceClient(metaclass=SpecialistPoolServiceClientMeta):
         r"""Gets a SpecialistPool.
 
         Args:
-            request (:class:`~.specialist_pool_service.GetSpecialistPoolRequest`):
+            request (google.cloud.aiplatform_v1beta1.types.GetSpecialistPoolRequest):
                 The request object. Request message for
                 ``SpecialistPoolService.GetSpecialistPool``.
-            name (:class:`str`):
+            name (str):
                 Required. The name of the SpecialistPool resource. The
                 form is
 
                 ``projects/{project}/locations/{location}/specialistPools/{specialist_pool}``.
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -478,7 +495,7 @@ class SpecialistPoolServiceClient(metaclass=SpecialistPoolServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.specialist_pool.SpecialistPool:
+            google.cloud.aiplatform_v1beta1.types.SpecialistPool:
                 SpecialistPool represents customers'
                 own workforce to work on their data
                 labeling jobs. It includes a group of
@@ -543,13 +560,14 @@ class SpecialistPoolServiceClient(metaclass=SpecialistPoolServiceClientMeta):
         r"""Lists SpecialistPools in a Location.
 
         Args:
-            request (:class:`~.specialist_pool_service.ListSpecialistPoolsRequest`):
+            request (google.cloud.aiplatform_v1beta1.types.ListSpecialistPoolsRequest):
                 The request object. Request message for
                 ``SpecialistPoolService.ListSpecialistPools``.
-            parent (:class:`str`):
+            parent (str):
                 Required. The name of the SpecialistPool's parent
                 resource. Format:
                 ``projects/{project}/locations/{location}``
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -561,7 +579,7 @@ class SpecialistPoolServiceClient(metaclass=SpecialistPoolServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.ListSpecialistPoolsPager:
+            google.cloud.aiplatform_v1beta1.services.specialist_pool_service.pagers.ListSpecialistPoolsPager:
                 Response message for
                 ``SpecialistPoolService.ListSpecialistPools``.
 
@@ -627,13 +645,14 @@ class SpecialistPoolServiceClient(metaclass=SpecialistPoolServiceClientMeta):
         in the pool.
 
         Args:
-            request (:class:`~.specialist_pool_service.DeleteSpecialistPoolRequest`):
+            request (google.cloud.aiplatform_v1beta1.types.DeleteSpecialistPoolRequest):
                 The request object. Request message for
                 ``SpecialistPoolService.DeleteSpecialistPool``.
-            name (:class:`str`):
+            name (str):
                 Required. The resource name of the SpecialistPool to
                 delete. Format:
                 ``projects/{project}/locations/{location}/specialistPools/{specialist_pool}``
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -645,24 +664,22 @@ class SpecialistPoolServiceClient(metaclass=SpecialistPoolServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.ga_operation.Operation:
+            google.api_core.operation.Operation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:`~.empty.Empty`: A generic empty message that
-                you can re-use to avoid defining duplicated empty
-                messages in your APIs. A typical example is to use it as
-                the request or the response type of an API method. For
-                instance:
+                The result type for the operation will be :class:`google.protobuf.empty_pb2.Empty` A generic empty message that you can re-use to avoid defining duplicated
+                   empty messages in your APIs. A typical example is to
+                   use it as the request or the response type of an API
+                   method. For instance:
 
-                ::
+                      service Foo {
+                         rpc Bar(google.protobuf.Empty) returns
+                         (google.protobuf.Empty);
 
-                    service Foo {
-                      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-                    }
+                      }
 
-                The JSON representation for ``Empty`` is empty JSON
-                object ``{}``.
+                   The JSON representation for Empty is empty JSON
+                   object {}.
 
         """
         # Create or coerce a protobuf request object.
@@ -725,18 +742,20 @@ class SpecialistPoolServiceClient(metaclass=SpecialistPoolServiceClientMeta):
         r"""Updates a SpecialistPool.
 
         Args:
-            request (:class:`~.specialist_pool_service.UpdateSpecialistPoolRequest`):
+            request (google.cloud.aiplatform_v1beta1.types.UpdateSpecialistPoolRequest):
                 The request object. Request message for
                 ``SpecialistPoolService.UpdateSpecialistPool``.
-            specialist_pool (:class:`~.gca_specialist_pool.SpecialistPool`):
+            specialist_pool (google.cloud.aiplatform_v1beta1.types.SpecialistPool):
                 Required. The SpecialistPool which
                 replaces the resource on the server.
+
                 This corresponds to the ``specialist_pool`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            update_mask (:class:`~.field_mask.FieldMask`):
+            update_mask (google.protobuf.field_mask_pb2.FieldMask):
                 Required. The update mask applies to
                 the resource.
+
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -748,19 +767,17 @@ class SpecialistPoolServiceClient(metaclass=SpecialistPoolServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.ga_operation.Operation:
+            google.api_core.operation.Operation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:`~.gca_specialist_pool.SpecialistPool`:
-                SpecialistPool represents customers' own workforce to
-                work on their data labeling jobs. It includes a group of
-                specialist managers who are responsible for managing the
-                labelers in this pool as well as customers' data
-                labeling jobs associated with this pool. Customers
-                create specialist pool as well as start data labeling
-                jobs on Cloud, managers and labelers work with the jobs
-                using CrowdCompute console.
+                The result type for the operation will be :class:`google.cloud.aiplatform_v1beta1.types.SpecialistPool` SpecialistPool represents customers' own workforce to work on their data
+                   labeling jobs. It includes a group of specialist
+                   managers who are responsible for managing the
+                   labelers in this pool as well as customers' data
+                   labeling jobs associated with this pool. Customers
+                   create specialist pool as well as start data labeling
+                   jobs on Cloud, managers and labelers work with the
+                   jobs using CrowdCompute console.
 
         """
         # Create or coerce a protobuf request object.

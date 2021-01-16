@@ -37,16 +37,16 @@ class Trial(proto.Message):
         id (str):
             Output only. The identifier of the Trial
             assigned by the service.
-        state (~.study.Trial.State):
+        state (google.cloud.aiplatform_v1beta1.types.Trial.State):
             Output only. The detailed state of the Trial.
-        parameters (Sequence[~.study.Trial.Parameter]):
+        parameters (Sequence[google.cloud.aiplatform_v1beta1.types.Trial.Parameter]):
             Output only. The parameters of the Trial.
-        final_measurement (~.study.Measurement):
+        final_measurement (google.cloud.aiplatform_v1beta1.types.Measurement):
             Output only. The final measurement containing
             the objective value.
-        start_time (~.timestamp.Timestamp):
+        start_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Time when the Trial was started.
-        end_time (~.timestamp.Timestamp):
+        end_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Time when the Trial's status changed to
             ``SUCCEEDED`` or ``INFEASIBLE``.
         custom_job (str):
@@ -72,7 +72,7 @@ class Trial(proto.Message):
                 Output only. The ID of the parameter. The parameter should
                 be defined in [StudySpec's
                 Parameters][google.cloud.aiplatform.v1beta1.StudySpec.parameters].
-            value (~.struct.Value):
+            value (google.protobuf.struct_pb2.Value):
                 Output only. The value of the parameter. ``number_value``
                 will be set if a parameter defined in StudySpec is in type
                 'INTEGER', 'DOUBLE' or 'DISCRETE'. ``string_value`` will be
@@ -103,11 +103,11 @@ class StudySpec(proto.Message):
     r"""Represents specification of a Study.
 
     Attributes:
-        metrics (Sequence[~.study.StudySpec.MetricSpec]):
+        metrics (Sequence[google.cloud.aiplatform_v1beta1.types.StudySpec.MetricSpec]):
             Required. Metric specs for the Study.
-        parameters (Sequence[~.study.StudySpec.ParameterSpec]):
+        parameters (Sequence[google.cloud.aiplatform_v1beta1.types.StudySpec.ParameterSpec]):
             Required. The set of parameters to tune.
-        algorithm (~.study.StudySpec.Algorithm):
+        algorithm (google.cloud.aiplatform_v1beta1.types.StudySpec.Algorithm):
             The search algorithm specified for the Study.
     """
 
@@ -125,7 +125,7 @@ class StudySpec(proto.Message):
                 Required. The ID of the metric. Must not
                 contain whitespaces and must be unique amongst
                 all MetricSpecs.
-            goal (~.study.StudySpec.MetricSpec.GoalType):
+            goal (google.cloud.aiplatform_v1beta1.types.StudySpec.MetricSpec.GoalType):
                 Required. The optimization goal of the
                 metric.
         """
@@ -144,22 +144,22 @@ class StudySpec(proto.Message):
         r"""Represents a single parameter to optimize.
 
         Attributes:
-            double_value_spec (~.study.StudySpec.ParameterSpec.DoubleValueSpec):
+            double_value_spec (google.cloud.aiplatform_v1beta1.types.StudySpec.ParameterSpec.DoubleValueSpec):
                 The value spec for a 'DOUBLE' parameter.
-            integer_value_spec (~.study.StudySpec.ParameterSpec.IntegerValueSpec):
+            integer_value_spec (google.cloud.aiplatform_v1beta1.types.StudySpec.ParameterSpec.IntegerValueSpec):
                 The value spec for an 'INTEGER' parameter.
-            categorical_value_spec (~.study.StudySpec.ParameterSpec.CategoricalValueSpec):
+            categorical_value_spec (google.cloud.aiplatform_v1beta1.types.StudySpec.ParameterSpec.CategoricalValueSpec):
                 The value spec for a 'CATEGORICAL' parameter.
-            discrete_value_spec (~.study.StudySpec.ParameterSpec.DiscreteValueSpec):
+            discrete_value_spec (google.cloud.aiplatform_v1beta1.types.StudySpec.ParameterSpec.DiscreteValueSpec):
                 The value spec for a 'DISCRETE' parameter.
             parameter_id (str):
                 Required. The ID of the parameter. Must not
                 contain whitespaces and must be unique amongst
                 all ParameterSpecs.
-            scale_type (~.study.StudySpec.ParameterSpec.ScaleType):
+            scale_type (google.cloud.aiplatform_v1beta1.types.StudySpec.ParameterSpec.ScaleType):
                 How the parameter should be scaled. Leave unset for
                 ``CATEGORICAL`` parameters.
-            conditional_parameter_specs (Sequence[~.study.StudySpec.ParameterSpec.ConditionalParameterSpec]):
+            conditional_parameter_specs (Sequence[google.cloud.aiplatform_v1beta1.types.StudySpec.ParameterSpec.ConditionalParameterSpec]):
                 A conditional parameter node is active if the parameter's
                 value matches the conditional node's parent_value_condition.
 
@@ -236,16 +236,16 @@ class StudySpec(proto.Message):
             parameter.
 
             Attributes:
-                parent_discrete_values (~.study.StudySpec.ParameterSpec.ConditionalParameterSpec.DiscreteValueCondition):
+                parent_discrete_values (google.cloud.aiplatform_v1beta1.types.StudySpec.ParameterSpec.ConditionalParameterSpec.DiscreteValueCondition):
                     The spec for matching values from a parent parameter of
                     ``DISCRETE`` type.
-                parent_int_values (~.study.StudySpec.ParameterSpec.ConditionalParameterSpec.IntValueCondition):
+                parent_int_values (google.cloud.aiplatform_v1beta1.types.StudySpec.ParameterSpec.ConditionalParameterSpec.IntValueCondition):
                     The spec for matching values from a parent parameter of
                     ``INTEGER`` type.
-                parent_categorical_values (~.study.StudySpec.ParameterSpec.ConditionalParameterSpec.CategoricalValueCondition):
+                parent_categorical_values (google.cloud.aiplatform_v1beta1.types.StudySpec.ParameterSpec.ConditionalParameterSpec.CategoricalValueCondition):
                     The spec for matching values from a parent parameter of
                     ``CATEGORICAL`` type.
-                parameter_spec (~.study.StudySpec.ParameterSpec):
+                parameter_spec (google.cloud.aiplatform_v1beta1.types.StudySpec.ParameterSpec):
                     Required. The spec for a conditional
                     parameter.
             """
@@ -373,7 +373,7 @@ class Measurement(proto.Message):
             Output only. The number of steps the machine
             learning model has been trained for. Must be
             non-negative.
-        metrics (Sequence[~.study.Measurement.Metric]):
+        metrics (Sequence[google.cloud.aiplatform_v1beta1.types.Measurement.Metric]):
             Output only. A list of metrics got by
             evaluating the objective functions using
             suggested Parameter values.

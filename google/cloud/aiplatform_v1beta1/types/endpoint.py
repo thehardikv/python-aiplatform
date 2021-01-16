@@ -42,14 +42,14 @@ class Endpoint(proto.Message):
             can be consist of any UTF-8 characters.
         description (str):
             The description of the Endpoint.
-        deployed_models (Sequence[~.endpoint.DeployedModel]):
+        deployed_models (Sequence[google.cloud.aiplatform_v1beta1.types.DeployedModel]):
             Output only. The models deployed in this Endpoint. To add or
             remove DeployedModels use
             ``EndpointService.DeployModel``
             and
             ``EndpointService.UndeployModel``
             respectively.
-        traffic_split (Sequence[~.endpoint.Endpoint.TrafficSplitEntry]):
+        traffic_split (Sequence[google.cloud.aiplatform_v1beta1.types.Endpoint.TrafficSplitEntry]):
             A map from a DeployedModel's ID to the
             percentage of this Endpoint's traffic that
             should be forwarded to that DeployedModel.
@@ -63,7 +63,7 @@ class Endpoint(proto.Message):
             Used to perform consistent read-modify-write
             updates. If not set, a blind "overwrite" update
             happens.
-        labels (Sequence[~.endpoint.Endpoint.LabelsEntry]):
+        labels (Sequence[google.cloud.aiplatform_v1beta1.types.Endpoint.LabelsEntry]):
             The labels with user-defined metadata to
             organize your Endpoints.
             Label keys and values can be no longer than 64
@@ -73,10 +73,10 @@ class Endpoint(proto.Message):
             are allowed.
             See https://goo.gl/xmQnxf for more information
             and examples of labels.
-        create_time (~.timestamp.Timestamp):
+        create_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Timestamp when this Endpoint was
             created.
-        update_time (~.timestamp.Timestamp):
+        update_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Timestamp when this Endpoint was
             last updated.
     """
@@ -107,11 +107,11 @@ class DeployedModel(proto.Message):
     DeployedModels.
 
     Attributes:
-        dedicated_resources (~.machine_resources.DedicatedResources):
+        dedicated_resources (google.cloud.aiplatform_v1beta1.types.DedicatedResources):
             A description of resources that are dedicated
             to the DeployedModel, and that need a higher
             degree of manual configuration.
-        automatic_resources (~.machine_resources.AutomaticResources):
+        automatic_resources (google.cloud.aiplatform_v1beta1.types.AutomaticResources):
             A description of resources that to large
             degree are decided by AI Platform, and require
             only a modest additional configuration.
@@ -125,10 +125,10 @@ class DeployedModel(proto.Message):
         display_name (str):
             The display name of the DeployedModel. If not provided upon
             creation, the Model's display_name is used.
-        create_time (~.timestamp.Timestamp):
+        create_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Timestamp when the DeployedModel
             was created.
-        explanation_spec (~.explanation.ExplanationSpec):
+        explanation_spec (google.cloud.aiplatform_v1beta1.types.ExplanationSpec):
             Explanation configuration for this DeployedModel.
 
             When deploying a Model using

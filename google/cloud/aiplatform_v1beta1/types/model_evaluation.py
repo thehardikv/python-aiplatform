@@ -44,11 +44,11 @@ class ModelEvaluation(proto.Message):
             of this ModelEvaluation. The schema is defined as an OpenAPI
             3.0.2 `Schema
             Object <https://tinyurl.com/y538mdwt#schema-object>`__.
-        metrics (~.struct.Value):
+        metrics (google.protobuf.struct_pb2.Value):
             Output only. Evaluation metrics of the Model. The schema of
             the metrics is stored in
             ``metrics_schema_uri``
-        create_time (~.timestamp.Timestamp):
+        create_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Timestamp when this
             ModelEvaluation was created.
         slice_dimensions (Sequence[str]):
@@ -58,7 +58,7 @@ class ModelEvaluation(proto.Message):
             filter of the
             ``ModelService.ListModelEvaluationSlices``
             request, in the form of ``slice.dimension = <dimension>``.
-        model_explanation (~.explanation.ModelExplanation):
+        model_explanation (google.cloud.aiplatform_v1beta1.types.ModelExplanation):
             Output only. Aggregated explanation metrics
             for the Model's prediction output over the data
             this ModelEvaluation uses. This field is

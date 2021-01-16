@@ -116,7 +116,20 @@ def test__get_default_mtls_endpoint():
     assert JobServiceClient._get_default_mtls_endpoint(non_googleapi) == non_googleapi
 
 
-@pytest.mark.parametrize("client_class", [JobServiceClient, JobServiceAsyncClient])
+def test_job_service_client_from_service_account_info():
+    creds = credentials.AnonymousCredentials()
+    with mock.patch.object(
+        service_account.Credentials, "from_service_account_info"
+    ) as factory:
+        factory.return_value = creds
+        info = {"valid": True}
+        client = JobServiceClient.from_service_account_info(info)
+        assert client.transport._credentials == creds
+
+        assert client.transport._host == "aiplatform.googleapis.com:443"
+
+
+@pytest.mark.parametrize("client_class", [JobServiceClient, JobServiceAsyncClient,])
 def test_job_service_client_from_service_account_file(client_class):
     creds = credentials.AnonymousCredentials()
     with mock.patch.object(
@@ -134,7 +147,10 @@ def test_job_service_client_from_service_account_file(client_class):
 
 def test_job_service_client_get_transport_class():
     transport = JobServiceClient.get_transport_class()
-    assert transport == transports.JobServiceGrpcTransport
+    available_transports = [
+        transports.JobServiceGrpcTransport,
+    ]
+    assert transport in available_transports
 
     transport = JobServiceClient.get_transport_class("grpc")
     assert transport == transports.JobServiceGrpcTransport
@@ -5541,7 +5557,7 @@ def test_transport_get_channel():
 
 @pytest.mark.parametrize(
     "transport_class",
-    [transports.JobServiceGrpcTransport, transports.JobServiceGrpcAsyncIOTransport],
+    [transports.JobServiceGrpcTransport, transports.JobServiceGrpcAsyncIOTransport,],
 )
 def test_transport_adc(transport_class):
     # Test default credentials are used if not provided.
@@ -5686,7 +5702,7 @@ def test_job_service_host_with_port():
 
 
 def test_job_service_grpc_transport_channel():
-    channel = grpc.insecure_channel("http://localhost/")
+    channel = grpc.secure_channel("http://localhost/", grpc.local_channel_credentials())
 
     # Check that channel is used if provided.
     transport = transports.JobServiceGrpcTransport(
@@ -5698,7 +5714,7 @@ def test_job_service_grpc_transport_channel():
 
 
 def test_job_service_grpc_asyncio_transport_channel():
-    channel = aio.insecure_channel("http://localhost/")
+    channel = aio.secure_channel("http://localhost/", grpc.local_channel_credentials())
 
     # Check that channel is used if provided.
     transport = transports.JobServiceGrpcAsyncIOTransport(
@@ -5718,7 +5734,7 @@ def test_job_service_transport_channel_mtls_with_client_cert_source(transport_cl
         "grpc.ssl_channel_credentials", autospec=True
     ) as grpc_ssl_channel_cred:
         with mock.patch.object(
-            transport_class, "create_channel", autospec=True
+            transport_class, "create_channel"
         ) as grpc_create_channel:
             mock_ssl_cred = mock.Mock()
             grpc_ssl_channel_cred.return_value = mock_ssl_cred
@@ -5747,6 +5763,10 @@ def test_job_service_transport_channel_mtls_with_client_cert_source(transport_cl
                 scopes=("https://www.googleapis.com/auth/cloud-platform",),
                 ssl_credentials=mock_ssl_cred,
                 quota_project_id=None,
+                options=[
+                    ("grpc.max_send_message_length", -1),
+                    ("grpc.max_receive_message_length", -1),
+                ],
             )
             assert transport.grpc_channel == mock_grpc_channel
             assert transport._ssl_channel_credentials == mock_ssl_cred
@@ -5764,7 +5784,7 @@ def test_job_service_transport_channel_mtls_with_adc(transport_class):
         ssl_credentials=mock.PropertyMock(return_value=mock_ssl_cred),
     ):
         with mock.patch.object(
-            transport_class, "create_channel", autospec=True
+            transport_class, "create_channel"
         ) as grpc_create_channel:
             mock_grpc_channel = mock.Mock()
             grpc_create_channel.return_value = mock_grpc_channel
@@ -5785,6 +5805,10 @@ def test_job_service_transport_channel_mtls_with_adc(transport_class):
                 scopes=("https://www.googleapis.com/auth/cloud-platform",),
                 ssl_credentials=mock_ssl_cred,
                 quota_project_id=None,
+                options=[
+                    ("grpc.max_send_message_length", -1),
+                    ("grpc.max_receive_message_length", -1),
+                ],
             )
             assert transport.grpc_channel == mock_grpc_channel
 

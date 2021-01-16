@@ -54,7 +54,7 @@ class TrainingPipeline(proto.Message):
         display_name (str):
             Required. The user-defined name of this
             TrainingPipeline.
-        input_data_config (~.training_pipeline.InputDataConfig):
+        input_data_config (google.cloud.aiplatform_v1beta1.types.InputDataConfig):
             Specifies AI Platform owned input data that may be used for
             training the Model. The TrainingPipeline's
             ``training_task_definition``
@@ -77,12 +77,12 @@ class TrainingPipeline(proto.Message):
             than the one given on input. The output URI will
             point to a location where the user only has a
             read access.
-        training_task_inputs (~.struct.Value):
+        training_task_inputs (google.protobuf.struct_pb2.Value):
             Required. The training task's parameter(s), as specified in
             the
             ``training_task_definition``'s
             ``inputs``.
-        training_task_metadata (~.struct.Value):
+        training_task_metadata (google.protobuf.struct_pb2.Value):
             Output only. The metadata information as specified in the
             ``training_task_definition``'s
             ``metadata``. This metadata is an auxiliary runtime and
@@ -91,7 +91,7 @@ class TrainingPipeline(proto.Message):
             best effort basis. Only present if the pipeline's
             ``training_task_definition``
             contains ``metadata`` object.
-        model_to_upload (~.model.Model):
+        model_to_upload (google.cloud.aiplatform_v1beta1.types.Model):
             Describes the Model that may be uploaded (via
             [ModelService.UploadMode][]) by this TrainingPipeline. The
             TrainingPipeline's
@@ -111,26 +111,26 @@ class TrainingPipeline(proto.Message):
             resource ``name``
             is populated. The Model is always uploaded into the Project
             and Location in which this pipeline is.
-        state (~.pipeline_state.PipelineState):
+        state (google.cloud.aiplatform_v1beta1.types.PipelineState):
             Output only. The detailed state of the
             pipeline.
-        error (~.status.Status):
+        error (google.rpc.status_pb2.Status):
             Output only. Only populated when the pipeline's state is
             ``PIPELINE_STATE_FAILED`` or ``PIPELINE_STATE_CANCELLED``.
-        create_time (~.timestamp.Timestamp):
+        create_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Time when the TrainingPipeline
             was created.
-        start_time (~.timestamp.Timestamp):
+        start_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Time when the TrainingPipeline for the first
             time entered the ``PIPELINE_STATE_RUNNING`` state.
-        end_time (~.timestamp.Timestamp):
+        end_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Time when the TrainingPipeline entered any of
             the following states: ``PIPELINE_STATE_SUCCEEDED``,
             ``PIPELINE_STATE_FAILED``, ``PIPELINE_STATE_CANCELLED``.
-        update_time (~.timestamp.Timestamp):
+        update_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Time when the TrainingPipeline
             was most recently updated.
-        labels (Sequence[~.training_pipeline.TrainingPipeline.LabelsEntry]):
+        labels (Sequence[google.cloud.aiplatform_v1beta1.types.TrainingPipeline.LabelsEntry]):
             The labels with user-defined metadata to
             organize TrainingPipelines.
             Label keys and values can be no longer than 64
@@ -176,20 +176,20 @@ class InputDataConfig(proto.Message):
     training, and possibly evaluating, the Model.
 
     Attributes:
-        fraction_split (~.training_pipeline.FractionSplit):
+        fraction_split (google.cloud.aiplatform_v1beta1.types.FractionSplit):
             Split based on fractions defining the size of
             each set.
-        filter_split (~.training_pipeline.FilterSplit):
+        filter_split (google.cloud.aiplatform_v1beta1.types.FilterSplit):
             Split based on the provided filters for each
             set.
-        predefined_split (~.training_pipeline.PredefinedSplit):
+        predefined_split (google.cloud.aiplatform_v1beta1.types.PredefinedSplit):
             Supported only for tabular Datasets.
             Split based on a predefined key.
-        timestamp_split (~.training_pipeline.TimestampSplit):
+        timestamp_split (google.cloud.aiplatform_v1beta1.types.TimestampSplit):
             Supported only for tabular Datasets.
             Split based on the timestamp of the input data
             pieces.
-        gcs_destination (~.io.GcsDestination):
+        gcs_destination (google.cloud.aiplatform_v1beta1.types.GcsDestination):
             The Google Cloud Storage location where the training data is
             to be written to. In the given directory a new directory
             will be created with name:
@@ -216,7 +216,7 @@ class InputDataConfig(proto.Message):
             -  AIP_TEST_DATA_URI =
 
             "gcs_destination/dataset---/test-*.${AIP_DATA_FORMAT}".
-        bigquery_destination (~.io.BigQueryDestination):
+        bigquery_destination (google.cloud.aiplatform_v1beta1.types.BigQueryDestination):
             The BigQuery project location where the training data is to
             be written to. In the given project a new dataset is created
             with name

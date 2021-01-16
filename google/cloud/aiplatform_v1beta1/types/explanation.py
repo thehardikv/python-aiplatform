@@ -46,7 +46,7 @@ class Explanation(proto.Message):
     ``instance``.
 
     Attributes:
-        attributions (Sequence[~.explanation.Attribution]):
+        attributions (Sequence[google.cloud.aiplatform_v1beta1.types.Attribution]):
             Output only. Feature attributions grouped by predicted
             outputs.
 
@@ -79,7 +79,7 @@ class ModelExplanation(proto.Message):
     instances.
 
     Attributes:
-        mean_attributions (Sequence[~.explanation.Attribution]):
+        mean_attributions (Sequence[google.cloud.aiplatform_v1beta1.types.Attribution]):
             Output only. Aggregated attributions explaning the Model's
             prediction outputs over the set of instances. The
             attributions are grouped by outputs.
@@ -140,7 +140,7 @@ class Attribution(proto.Message):
             If the Model predicted output has multiple dimensions, this
             is the value in the output located by
             ``output_index``.
-        feature_attributions (~.struct.Value):
+        feature_attributions (google.protobuf.struct_pb2.Value):
             Output only. Attributions of each explained feature.
             Features are extracted from the [prediction
             instances][google.cloud.aiplatform.v1beta1.ExplainRequest.instances]
@@ -248,10 +248,10 @@ class ExplanationSpec(proto.Message):
     r"""Specification of Model explanation.
 
     Attributes:
-        parameters (~.explanation.ExplanationParameters):
+        parameters (google.cloud.aiplatform_v1beta1.types.ExplanationParameters):
             Required. Parameters that configure
             explaining of the Model's predictions.
-        metadata (~.explanation_metadata.ExplanationMetadata):
+        metadata (google.cloud.aiplatform_v1beta1.types.ExplanationMetadata):
             Required. Metadata describing the Model's
             input and output for explanation.
     """
@@ -267,7 +267,7 @@ class ExplanationParameters(proto.Message):
     r"""Parameters to configure explaining for Model's predictions.
 
     Attributes:
-        sampled_shapley_attribution (~.explanation.SampledShapleyAttribution):
+        sampled_shapley_attribution (google.cloud.aiplatform_v1beta1.types.SampledShapleyAttribution):
             An attribution method that approximates
             Shapley values for features that contribute to
             the label being predicted. A sampling strategy
@@ -275,13 +275,13 @@ class ExplanationParameters(proto.Message):
             considering all subsets of features. Refer to
             this paper for model details:
             https://arxiv.org/abs/1306.4265.
-        integrated_gradients_attribution (~.explanation.IntegratedGradientsAttribution):
+        integrated_gradients_attribution (google.cloud.aiplatform_v1beta1.types.IntegratedGradientsAttribution):
             An attribution method that computes Aumann-
             hapley values taking advantage of the model's
             fully differentiable structure. Refer to this
             paper for more details:
             https://arxiv.org/abs/1703.01365
-        xrai_attribution (~.explanation.XraiAttribution):
+        xrai_attribution (google.cloud.aiplatform_v1beta1.types.XraiAttribution):
             An attribution method that redistributes
             Integrated Gradients attribution to segmented
             regions, taking advantage of the model's fully
@@ -301,7 +301,7 @@ class ExplanationParameters(proto.Message):
             to Models that predicts more than one outputs
             (e,g, multi-class Models). When set to -1,
             returns explanations for all outputs.
-        output_indices (~.struct.ListValue):
+        output_indices (google.protobuf.struct_pb2.ListValue):
             If populated, only returns attributions that have
             ``output_index`` contained in
             output_indices. It must be an ndarray of integers, with the
@@ -367,7 +367,7 @@ class IntegratedGradientsAttribution(proto.Message):
             range.
 
             Valid range of its value is [1, 100], inclusively.
-        smooth_grad_config (~.explanation.SmoothGradConfig):
+        smooth_grad_config (google.cloud.aiplatform_v1beta1.types.SmoothGradConfig):
             Config for SmoothGrad approximation of
             gradients.
             When enabled, the gradients are approximated by
@@ -402,7 +402,7 @@ class XraiAttribution(proto.Message):
             error range.
 
             Valid range of its value is [1, 100], inclusively.
-        smooth_grad_config (~.explanation.SmoothGradConfig):
+        smooth_grad_config (google.cloud.aiplatform_v1beta1.types.SmoothGradConfig):
             Config for SmoothGrad approximation of
             gradients.
             When enabled, the gradients are approximated by
@@ -447,7 +447,7 @@ class SmoothGradConfig(proto.Message):
             If the distribution is different per feature, set
             ``feature_noise_sigma``
             instead for each feature.
-        feature_noise_sigma (~.explanation.FeatureNoiseSigma):
+        feature_noise_sigma (google.cloud.aiplatform_v1beta1.types.FeatureNoiseSigma):
             This is similar to
             ``noise_sigma``,
             but provides additional flexibility. A separate noise sigma
@@ -481,7 +481,7 @@ class FeatureNoiseSigma(proto.Message):
     to interpolated inputs prior to computing gradients.
 
     Attributes:
-        noise_sigma (Sequence[~.explanation.FeatureNoiseSigma.NoiseSigmaForFeature]):
+        noise_sigma (Sequence[google.cloud.aiplatform_v1beta1.types.FeatureNoiseSigma.NoiseSigmaForFeature]):
             Noise sigma per feature. No noise is added to
             features that are not set.
     """

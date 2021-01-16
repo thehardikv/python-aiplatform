@@ -48,20 +48,20 @@ class Dataset(proto.Message):
             schema files that can be used here are found in
             gs://google-cloud-
             aiplatform/schema/dataset/metadata/.
-        metadata (~.struct.Value):
+        metadata (google.protobuf.struct_pb2.Value):
             Required. Additional information about the
             Dataset.
-        create_time (~.timestamp.Timestamp):
+        create_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Timestamp when this Dataset was
             created.
-        update_time (~.timestamp.Timestamp):
+        update_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Timestamp when this Dataset was
             last updated.
         etag (str):
             Used to perform consistent read-modify-write
             updates. If not set, a blind "overwrite" update
             happens.
-        labels (Sequence[~.dataset.Dataset.LabelsEntry]):
+        labels (Sequence[google.cloud.aiplatform_v1beta1.types.Dataset.LabelsEntry]):
             The labels with user-defined metadata to organize your
             Datasets.
 
@@ -105,10 +105,10 @@ class ImportDataConfig(proto.Message):
     DataItems and the Annotations.
 
     Attributes:
-        gcs_source (~.io.GcsSource):
+        gcs_source (google.cloud.aiplatform_v1beta1.types.GcsSource):
             The Google Cloud Storage location for the
             input content.
-        data_item_labels (Sequence[~.dataset.ImportDataConfig.DataItemLabelsEntry]):
+        data_item_labels (Sequence[google.cloud.aiplatform_v1beta1.types.ImportDataConfig.DataItemLabelsEntry]):
             Labels that will be applied to newly imported DataItems. If
             an identical DataItem as one being imported already exists
             in the Dataset, then these labels will be appended to these
@@ -145,7 +145,7 @@ class ExportDataConfig(proto.Message):
     destination of the export and how to export.
 
     Attributes:
-        gcs_destination (~.io.GcsDestination):
+        gcs_destination (google.cloud.aiplatform_v1beta1.types.GcsDestination):
             The Google Cloud Storage location where the output is to be
             written to. In the given directory a new directory will be
             created with name:

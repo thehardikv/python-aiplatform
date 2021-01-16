@@ -25,7 +25,6 @@ from .video_action_recognition import VideoActionRecognitionPredictionInstance
 from .video_classification import VideoClassificationPredictionInstance
 from .video_object_tracking import VideoObjectTrackingPredictionInstance
 
-
 __all__ = (
     "ImageClassificationPredictionInstance",
     "ImageObjectDetectionPredictionInstance",

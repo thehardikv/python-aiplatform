@@ -22,7 +22,6 @@ from .video_action_recognition import VideoActionRecognitionPredictionParams
 from .video_classification import VideoClassificationPredictionParams
 from .video_object_tracking import VideoObjectTrackingPredictionParams
 
-
 __all__ = (
     "ImageClassificationPredictionParams",
     "ImageObjectDetectionPredictionParams",

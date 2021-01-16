@@ -53,27 +53,27 @@ class CustomJob(proto.Message):
             Required. The display name of the CustomJob.
             The name can be up to 128 characters long and
             can be consist of any UTF-8 characters.
-        job_spec (~.custom_job.CustomJobSpec):
+        job_spec (google.cloud.aiplatform_v1beta1.types.CustomJobSpec):
             Required. Job spec.
-        state (~.job_state.JobState):
+        state (google.cloud.aiplatform_v1beta1.types.JobState):
             Output only. The detailed state of the job.
-        create_time (~.timestamp.Timestamp):
+        create_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Time when the CustomJob was
             created.
-        start_time (~.timestamp.Timestamp):
+        start_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Time when the CustomJob for the first time
             entered the ``JOB_STATE_RUNNING`` state.
-        end_time (~.timestamp.Timestamp):
+        end_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Time when the CustomJob entered any of the
             following states: ``JOB_STATE_SUCCEEDED``,
             ``JOB_STATE_FAILED``, ``JOB_STATE_CANCELLED``.
-        update_time (~.timestamp.Timestamp):
+        update_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Time when the CustomJob was most
             recently updated.
-        error (~.status.Status):
+        error (google.rpc.status_pb2.Status):
             Output only. Only populated when job's state is
             ``JOB_STATE_FAILED`` or ``JOB_STATE_CANCELLED``.
-        labels (Sequence[~.custom_job.CustomJob.LabelsEntry]):
+        labels (Sequence[google.cloud.aiplatform_v1beta1.types.CustomJob.LabelsEntry]):
             The labels with user-defined metadata to
             organize CustomJobs.
             Label keys and values can be no longer than 64
@@ -110,10 +110,10 @@ class CustomJobSpec(proto.Message):
     r"""Represents the spec of a CustomJob.
 
     Attributes:
-        worker_pool_specs (Sequence[~.custom_job.WorkerPoolSpec]):
+        worker_pool_specs (Sequence[google.cloud.aiplatform_v1beta1.types.WorkerPoolSpec]):
             Required. The spec of the worker pools
             including machine type and Docker image.
-        scheduling (~.custom_job.Scheduling):
+        scheduling (google.cloud.aiplatform_v1beta1.types.Scheduling):
             Scheduling options for a CustomJob.
         service_account (str):
             Specifies the service account for workload
@@ -133,7 +133,7 @@ class CustomJobSpec(proto.Message):
             Private services access must already be configured for the
             network. If left unspecified, the job is not peered with any
             network.
-        base_output_directory (~.io.GcsDestination):
+        base_output_directory (google.cloud.aiplatform_v1beta1.types.GcsDestination):
             The Google Cloud Storage location to store the output of
             this CustomJob or HyperparameterTuningJob. For
             HyperparameterTuningJob,
@@ -185,17 +185,17 @@ class WorkerPoolSpec(proto.Message):
     r"""Represents the spec of a worker pool in a job.
 
     Attributes:
-        container_spec (~.custom_job.ContainerSpec):
+        container_spec (google.cloud.aiplatform_v1beta1.types.ContainerSpec):
             The custom container task.
-        python_package_spec (~.custom_job.PythonPackageSpec):
+        python_package_spec (google.cloud.aiplatform_v1beta1.types.PythonPackageSpec):
             The Python packaged task.
-        machine_spec (~.machine_resources.MachineSpec):
+        machine_spec (google.cloud.aiplatform_v1beta1.types.MachineSpec):
             Required. Immutable. The specification of a
             single machine.
         replica_count (int):
             Required. The number of worker replicas to
             use for this worker pool.
-        disk_spec (~.machine_resources.DiskSpec):
+        disk_spec (google.cloud.aiplatform_v1beta1.types.DiskSpec):
             Disk spec.
     """
 
@@ -280,7 +280,7 @@ class Scheduling(proto.Message):
     jobs.
 
     Attributes:
-        timeout (~.duration.Duration):
+        timeout (google.protobuf.duration_pb2.Duration):
             The maximum job running time. The default is
             7 days.
         restart_job_on_worker_restart (bool):

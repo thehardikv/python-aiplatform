@@ -30,7 +30,6 @@ _transport_registry = (
 _transport_registry["grpc"] = SpecialistPoolServiceGrpcTransport
 _transport_registry["grpc_asyncio"] = SpecialistPoolServiceGrpcAsyncIOTransport
 
-
 __all__ = (
     "SpecialistPoolServiceTransport",
     "SpecialistPoolServiceGrpcTransport",

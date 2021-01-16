@@ -43,7 +43,7 @@ class Model(proto.Message):
             can be consist of any UTF-8 characters.
         description (str):
             The description of the Model.
-        predict_schemata (~.model.PredictSchemata):
+        predict_schemata (google.cloud.aiplatform_v1beta1.types.PredictSchemata):
             The schemata that describe formats of the Model's
             predictions and explanations as given and returned via
             ``PredictionService.Predict``
@@ -62,12 +62,12 @@ class Model(proto.Message):
             be immutable and probably different, including the URI
             scheme, than the one given on input. The output URI will
             point to a location where the user only has a read access.
-        metadata (~.struct.Value):
+        metadata (google.protobuf.struct_pb2.Value):
             Immutable. An additional information about the Model; the
             schema of the metadata can be found in
             ``metadata_schema``.
             Unset if the Model does not have any additional information.
-        supported_export_formats (Sequence[~.model.Model.ExportFormat]):
+        supported_export_formats (Sequence[google.cloud.aiplatform_v1beta1.types.Model.ExportFormat]):
             Output only. The formats in which this Model
             may be exported. If empty, this Model is not
             available for export.
@@ -75,7 +75,7 @@ class Model(proto.Message):
             Output only. The resource name of the
             TrainingPipeline that uploaded this Model, if
             any.
-        container_spec (~.model.ModelContainerSpec):
+        container_spec (google.cloud.aiplatform_v1beta1.types.ModelContainerSpec):
             Input only. The specification of the container that is to be
             used when deploying this Model. The specification is
             ingested upon
@@ -86,7 +86,7 @@ class Model(proto.Message):
             Immutable. The path to the directory
             containing the Model artifact and any of its
             supporting files. Not present for AutoML Models.
-        supported_deployment_resources_types (Sequence[~.model.Model.DeploymentResourcesType]):
+        supported_deployment_resources_types (Sequence[google.cloud.aiplatform_v1beta1.types.Model.DeploymentResourcesType]):
             Output only. When this Model is deployed, its prediction
             resources are described by the ``prediction_resources``
             field of the
@@ -182,18 +182,18 @@ class Model(proto.Message):
             ``PredictionService.Predict``
             or
             ``PredictionService.Explain``.
-        create_time (~.timestamp.Timestamp):
+        create_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Timestamp when this Model was
             uploaded into AI Platform.
-        update_time (~.timestamp.Timestamp):
+        update_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Timestamp when this Model was
             most recently updated.
-        deployed_models (Sequence[~.deployed_model_ref.DeployedModelRef]):
+        deployed_models (Sequence[google.cloud.aiplatform_v1beta1.types.DeployedModelRef]):
             Output only. The pointers to DeployedModels
             created from this Model. Note that Model could
             have been deployed to Endpoints in different
             Locations.
-        explanation_spec (~.explanation.ExplanationSpec):
+        explanation_spec (google.cloud.aiplatform_v1beta1.types.ExplanationSpec):
             Output only. The default explanation specification for this
             Model.
 
@@ -216,7 +216,7 @@ class Model(proto.Message):
             Used to perform consistent read-modify-write
             updates. If not set, a blind "overwrite" update
             happens.
-        labels (Sequence[~.model.Model.LabelsEntry]):
+        labels (Sequence[google.cloud.aiplatform_v1beta1.types.Model.LabelsEntry]):
             The labels with user-defined metadata to
             organize your Models.
             Label keys and values can be no longer than 64
@@ -260,7 +260,7 @@ class Model(proto.Message):
 
                 -  ``custom-trained`` A Model that was uploaded or trained
                    by custom code.
-            exportable_contents (Sequence[~.model.Model.ExportFormat.ExportableContent]):
+            exportable_contents (Sequence[google.cloud.aiplatform_v1beta1.types.Model.ExportFormat.ExportableContent]):
                 Output only. The content of this Model that
                 may be exported.
         """
@@ -491,7 +491,7 @@ class ModelContainerSpec(proto.Message):
             field corresponds to the ``args`` field of the Kubernetes
             Containers `v1 core
             API <https://tinyurl.com/k8s-io-api/v1.18/#container-v1-core>`__.
-        env (Sequence[~.env_var.EnvVar]):
+        env (Sequence[google.cloud.aiplatform_v1beta1.types.EnvVar]):
             Immutable. List of environment variables to set in the
             container. After the container starts running, code running
             in the container can read these environment variables.
@@ -524,7 +524,7 @@ class ModelContainerSpec(proto.Message):
             This field corresponds to the ``env`` field of the
             Kubernetes Containers `v1 core
             API <https://tinyurl.com/k8s-io-api/v1.18/#container-v1-core>`__.
-        ports (Sequence[~.model.Port]):
+        ports (Sequence[google.cloud.aiplatform_v1beta1.types.Port]):
             Immutable. List of ports to expose from the container. AI
             Platform sends any prediction requests that it receives to
             the first port on this list. AI Platform also sends

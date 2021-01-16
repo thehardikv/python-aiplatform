@@ -52,7 +52,7 @@ class CreateEndpointRequest(proto.Message):
             Required. The resource name of the Location to create the
             Endpoint in. Format:
             ``projects/{project}/locations/{location}``
-        endpoint (~.gca_endpoint.Endpoint):
+        endpoint (google.cloud.aiplatform_v1beta1.types.Endpoint):
             Required. The Endpoint to create.
     """
 
@@ -66,7 +66,7 @@ class CreateEndpointOperationMetadata(proto.Message):
     ``EndpointService.CreateEndpoint``.
 
     Attributes:
-        generic_metadata (~.operation.GenericOperationMetadata):
+        generic_metadata (google.cloud.aiplatform_v1beta1.types.GenericOperationMetadata):
             The operation generic information.
     """
 
@@ -130,7 +130,7 @@ class ListEndpointsRequest(proto.Message):
             of the previous
             ``EndpointService.ListEndpoints``
             call.
-        read_mask (~.field_mask.FieldMask):
+        read_mask (google.protobuf.field_mask_pb2.FieldMask):
             Optional. Mask specifying which fields to
             read.
     """
@@ -151,7 +151,7 @@ class ListEndpointsResponse(proto.Message):
     ``EndpointService.ListEndpoints``.
 
     Attributes:
-        endpoints (Sequence[~.gca_endpoint.Endpoint]):
+        endpoints (Sequence[google.cloud.aiplatform_v1beta1.types.Endpoint]):
             List of Endpoints in the requested page.
         next_page_token (str):
             A token to retrieve next page of results. Pass to
@@ -175,10 +175,10 @@ class UpdateEndpointRequest(proto.Message):
     ``EndpointService.UpdateEndpoint``.
 
     Attributes:
-        endpoint (~.gca_endpoint.Endpoint):
+        endpoint (google.cloud.aiplatform_v1beta1.types.Endpoint):
             Required. The Endpoint which replaces the
             resource on the server.
-        update_mask (~.field_mask.FieldMask):
+        update_mask (google.protobuf.field_mask_pb2.FieldMask):
             Required. The update mask applies to the
             resource.
     """
@@ -211,14 +211,14 @@ class DeployModelRequest(proto.Message):
             Required. The name of the Endpoint resource into which to
             deploy a Model. Format:
             ``projects/{project}/locations/{location}/endpoints/{endpoint}``
-        deployed_model (~.gca_endpoint.DeployedModel):
+        deployed_model (google.cloud.aiplatform_v1beta1.types.DeployedModel):
             Required. The DeployedModel to be created within the
             Endpoint. Note that
             ``Endpoint.traffic_split``
             must be updated for the DeployedModel to start receiving
             traffic, either as part of this call, or via
             ``EndpointService.UpdateEndpoint``.
-        traffic_split (Sequence[~.endpoint_service.DeployModelRequest.TrafficSplitEntry]):
+        traffic_split (Sequence[google.cloud.aiplatform_v1beta1.types.DeployModelRequest.TrafficSplitEntry]):
             A map from a DeployedModel's ID to the percentage of this
             Endpoint's traffic that should be forwarded to that
             DeployedModel.
@@ -250,7 +250,7 @@ class DeployModelResponse(proto.Message):
     ``EndpointService.DeployModel``.
 
     Attributes:
-        deployed_model (~.gca_endpoint.DeployedModel):
+        deployed_model (google.cloud.aiplatform_v1beta1.types.DeployedModel):
             The DeployedModel that had been deployed in
             the Endpoint.
     """
@@ -265,7 +265,7 @@ class DeployModelOperationMetadata(proto.Message):
     ``EndpointService.DeployModel``.
 
     Attributes:
-        generic_metadata (~.operation.GenericOperationMetadata):
+        generic_metadata (google.cloud.aiplatform_v1beta1.types.GenericOperationMetadata):
             The operation generic information.
     """
 
@@ -286,7 +286,7 @@ class UndeployModelRequest(proto.Message):
         deployed_model_id (str):
             Required. The ID of the DeployedModel to be
             undeployed from the Endpoint.
-        traffic_split (Sequence[~.endpoint_service.UndeployModelRequest.TrafficSplitEntry]):
+        traffic_split (Sequence[google.cloud.aiplatform_v1beta1.types.UndeployModelRequest.TrafficSplitEntry]):
             If this field is provided, then the Endpoint's
             ``traffic_split``
             will be overwritten with it. If last DeployedModel is being
@@ -315,7 +315,7 @@ class UndeployModelOperationMetadata(proto.Message):
     ``EndpointService.UndeployModel``.
 
     Attributes:
-        generic_metadata (~.operation.GenericOperationMetadata):
+        generic_metadata (google.cloud.aiplatform_v1beta1.types.GenericOperationMetadata):
             The operation generic information.
     """
 

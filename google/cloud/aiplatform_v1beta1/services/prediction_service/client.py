@@ -114,6 +114,22 @@ class PredictionServiceClient(metaclass=PredictionServiceClientMeta):
     )
 
     @classmethod
+    def from_service_account_info(cls, info: dict, *args, **kwargs):
+        """Creates an instance of this client using the provided credentials info.
+
+        Args:
+            info (dict): The service account private key info.
+            args: Additional arguments to pass to the constructor.
+            kwargs: Additional arguments to pass to the constructor.
+
+        Returns:
+            PredictionServiceClient: The constructed client.
+        """
+        credentials = service_account.Credentials.from_service_account_info(info)
+        kwargs["credentials"] = credentials
+        return cls(*args, **kwargs)
+
+    @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
         """Creates an instance of this client using the provided credentials
         file.
@@ -125,7 +141,7 @@ class PredictionServiceClient(metaclass=PredictionServiceClientMeta):
             kwargs: Additional arguments to pass to the constructor.
 
         Returns:
-            {@api.name}: The constructed client.
+            PredictionServiceClient: The constructed client.
         """
         credentials = service_account.Credentials.from_service_account_file(filename)
         kwargs["credentials"] = credentials
@@ -233,10 +249,10 @@ class PredictionServiceClient(metaclass=PredictionServiceClientMeta):
                 credentials identify the application to the service; if none
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
-            transport (Union[str, ~.PredictionServiceTransport]): The
+            transport (Union[str, PredictionServiceTransport]): The
                 transport to use. If set to None, a transport is chosen
                 automatically.
-            client_options (client_options_lib.ClientOptions): Custom options for the
+            client_options (google.api_core.client_options.ClientOptions): Custom options for the
                 client. It won't take effect if a ``transport`` instance is provided.
                 (1) The ``api_endpoint`` property can be used to override the
                 default endpoint provided by the client. GOOGLE_API_USE_MTLS_ENDPOINT
@@ -348,17 +364,18 @@ class PredictionServiceClient(metaclass=PredictionServiceClientMeta):
         r"""Perform an online prediction.
 
         Args:
-            request (:class:`~.prediction_service.PredictRequest`):
+            request (google.cloud.aiplatform_v1beta1.types.PredictRequest):
                 The request object. Request message for
                 ``PredictionService.Predict``.
-            endpoint (:class:`str`):
+            endpoint (str):
                 Required. The name of the Endpoint requested to serve
                 the prediction. Format:
                 ``projects/{project}/locations/{location}/endpoints/{endpoint}``
+
                 This corresponds to the ``endpoint`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            instances (:class:`Sequence[~.struct.Value]`):
+            instances (Sequence[google.protobuf.struct_pb2.Value]):
                 Required. The instances that are the input to the
                 prediction call. A DeployedModel may have an upper limit
                 on the number of instances it supports per request, and
@@ -370,16 +387,18 @@ class PredictionServiceClient(metaclass=PredictionServiceClientMeta):
                 [Model's][google.cloud.aiplatform.v1beta1.DeployedModel.model]
                 [PredictSchemata's][google.cloud.aiplatform.v1beta1.Model.predict_schemata]
                 ``instance_schema_uri``.
+
                 This corresponds to the ``instances`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            parameters (:class:`~.struct.Value`):
+            parameters (google.protobuf.struct_pb2.Value):
                 The parameters that govern the prediction. The schema of
                 the parameters may be specified via Endpoint's
                 DeployedModels' [Model's
                 ][google.cloud.aiplatform.v1beta1.DeployedModel.model]
                 [PredictSchemata's][google.cloud.aiplatform.v1beta1.Model.predict_schemata]
                 ``parameters_schema_uri``.
+
                 This corresponds to the ``parameters`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -391,7 +410,7 @@ class PredictionServiceClient(metaclass=PredictionServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.prediction_service.PredictResponse:
+            google.cloud.aiplatform_v1beta1.types.PredictResponse:
                 Response message for
                 ``PredictionService.Predict``.
 
@@ -466,17 +485,18 @@ class PredictionServiceClient(metaclass=PredictionServiceClientMeta):
         explanation_spec.
 
         Args:
-            request (:class:`~.prediction_service.ExplainRequest`):
+            request (google.cloud.aiplatform_v1beta1.types.ExplainRequest):
                 The request object. Request message for
                 ``PredictionService.Explain``.
-            endpoint (:class:`str`):
+            endpoint (str):
                 Required. The name of the Endpoint requested to serve
                 the explanation. Format:
                 ``projects/{project}/locations/{location}/endpoints/{endpoint}``
+
                 This corresponds to the ``endpoint`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            instances (:class:`Sequence[~.struct.Value]`):
+            instances (Sequence[google.protobuf.struct_pb2.Value]):
                 Required. The instances that are the input to the
                 explanation call. A DeployedModel may have an upper
                 limit on the number of instances it supports per
@@ -488,23 +508,26 @@ class PredictionServiceClient(metaclass=PredictionServiceClientMeta):
                 [Model's][google.cloud.aiplatform.v1beta1.DeployedModel.model]
                 [PredictSchemata's][google.cloud.aiplatform.v1beta1.Model.predict_schemata]
                 ``instance_schema_uri``.
+
                 This corresponds to the ``instances`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            parameters (:class:`~.struct.Value`):
+            parameters (google.protobuf.struct_pb2.Value):
                 The parameters that govern the prediction. The schema of
                 the parameters may be specified via Endpoint's
                 DeployedModels' [Model's
                 ][google.cloud.aiplatform.v1beta1.DeployedModel.model]
                 [PredictSchemata's][google.cloud.aiplatform.v1beta1.Model.predict_schemata]
                 ``parameters_schema_uri``.
+
                 This corresponds to the ``parameters`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            deployed_model_id (:class:`str`):
+            deployed_model_id (str):
                 If specified, this ExplainRequest will be served by the
                 chosen DeployedModel, overriding
                 ``Endpoint.traffic_split``.
+
                 This corresponds to the ``deployed_model_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -516,7 +539,7 @@ class PredictionServiceClient(metaclass=PredictionServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.prediction_service.ExplainResponse:
+            google.cloud.aiplatform_v1beta1.types.ExplainResponse:
                 Response message for
                 ``PredictionService.Explain``.
 

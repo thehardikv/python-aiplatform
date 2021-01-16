@@ -80,7 +80,7 @@ class MachineSpec(proto.Message):
             or as part of
             ``WorkerPoolSpec``
             this field is required.
-        accelerator_type (~.gca_accelerator_type.AcceleratorType):
+        accelerator_type (google.cloud.aiplatform_v1beta1.types.AcceleratorType):
             Immutable. The type of accelerator(s) that may be attached
             to the machine as per
             ``accelerator_count``.
@@ -104,7 +104,7 @@ class DedicatedResources(proto.Message):
     configuration.
 
     Attributes:
-        machine_spec (~.machine_resources.MachineSpec):
+        machine_spec (google.cloud.aiplatform_v1beta1.types.MachineSpec):
             Required. Immutable. The specification of a
             single machine used by the prediction.
         min_replica_count (int):
@@ -181,7 +181,7 @@ class BatchDedicatedResources(proto.Message):
     configuration.
 
     Attributes:
-        machine_spec (~.machine_resources.MachineSpec):
+        machine_spec (google.cloud.aiplatform_v1beta1.types.MachineSpec):
             Required. Immutable. The specification of a
             single machine.
         starting_replica_count (int):

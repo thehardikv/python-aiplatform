@@ -60,20 +60,20 @@ class BatchPredictionJob(proto.Message):
             same ancestor Location. Starting this job has no
             impact on any existing deployments of the Model
             and their resources.
-        input_config (~.batch_prediction_job.BatchPredictionJob.InputConfig):
+        input_config (google.cloud.aiplatform_v1beta1.types.BatchPredictionJob.InputConfig):
             Required. Input configuration of the instances on which
             predictions are performed. The schema of any single instance
             may be specified via the
             [Model's][google.cloud.aiplatform.v1beta1.BatchPredictionJob.model]
             [PredictSchemata's][google.cloud.aiplatform.v1beta1.Model.predict_schemata]
             ``instance_schema_uri``.
-        model_parameters (~.struct.Value):
+        model_parameters (google.protobuf.struct_pb2.Value):
             The parameters that govern the predictions. The schema of
             the parameters may be specified via the
             [Model's][google.cloud.aiplatform.v1beta1.BatchPredictionJob.model]
             [PredictSchemata's][google.cloud.aiplatform.v1beta1.Model.predict_schemata]
             ``parameters_schema_uri``.
-        output_config (~.batch_prediction_job.BatchPredictionJob.OutputConfig):
+        output_config (google.cloud.aiplatform_v1beta1.types.BatchPredictionJob.OutputConfig):
             Required. The Configuration specifying where output
             predictions should be written. The schema of any single
             prediction may be specified as a concatenation of
@@ -82,14 +82,14 @@ class BatchPredictionJob(proto.Message):
             ``instance_schema_uri``
             and
             ``prediction_schema_uri``.
-        dedicated_resources (~.machine_resources.BatchDedicatedResources):
+        dedicated_resources (google.cloud.aiplatform_v1beta1.types.BatchDedicatedResources):
             The config of resources used by the Model during the batch
             prediction. If the Model
             ``supports``
             DEDICATED_RESOURCES this config may be provided (and the job
             will use these resources), if the Model doesn't support
             AUTOMATIC_RESOURCES, this config must be provided.
-        manual_batch_tuning_parameters (~.gca_manual_batch_tuning_parameters.ManualBatchTuningParameters):
+        manual_batch_tuning_parameters (google.cloud.aiplatform_v1beta1.types.ManualBatchTuningParameters):
             Immutable. Parameters configuring the batch behavior.
             Currently only applicable when
             ``dedicated_resources``
@@ -115,7 +115,7 @@ class BatchPredictionJob(proto.Message):
                object.
             -  ``csv``: Generating explanations for CSV format is not
                supported.
-        explanation_spec (~.explanation.ExplanationSpec):
+        explanation_spec (google.cloud.aiplatform_v1beta1.types.ExplanationSpec):
             Explanation configuration for this BatchPredictionJob. Can
             only be specified if
             ``generate_explanation``
@@ -134,21 +134,21 @@ class BatchPredictionJob(proto.Message):
             ``Model.explanation_spec``
             must be populated, otherwise explanation for this Model is
             not allowed.
-        output_info (~.batch_prediction_job.BatchPredictionJob.OutputInfo):
+        output_info (google.cloud.aiplatform_v1beta1.types.BatchPredictionJob.OutputInfo):
             Output only. Information further describing
             the output of this job.
-        state (~.job_state.JobState):
+        state (google.cloud.aiplatform_v1beta1.types.JobState):
             Output only. The detailed state of the job.
-        error (~.status.Status):
+        error (google.rpc.status_pb2.Status):
             Output only. Only populated when the job's state is
             JOB_STATE_FAILED or JOB_STATE_CANCELLED.
-        partial_failures (Sequence[~.status.Status]):
+        partial_failures (Sequence[google.rpc.status_pb2.Status]):
             Output only. Partial failures encountered.
             For example, single files that can't be read.
             This field never exceeds 20 entries.
             Status details fields contain standard GCP error
             details.
-        resources_consumed (~.machine_resources.ResourcesConsumed):
+        resources_consumed (google.cloud.aiplatform_v1beta1.types.ResourcesConsumed):
             Output only. Information about resources that
             had been consumed by this job. Provided in real
             time at best effort basis, as well as a final
@@ -156,23 +156,23 @@ class BatchPredictionJob(proto.Message):
 
             Note: This field currently may be not populated
             for batch predictions that use AutoML Models.
-        completion_stats (~.gca_completion_stats.CompletionStats):
+        completion_stats (google.cloud.aiplatform_v1beta1.types.CompletionStats):
             Output only. Statistics on completed and
             failed prediction instances.
-        create_time (~.timestamp.Timestamp):
+        create_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Time when the BatchPredictionJob
             was created.
-        start_time (~.timestamp.Timestamp):
+        start_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Time when the BatchPredictionJob for the first
             time entered the ``JOB_STATE_RUNNING`` state.
-        end_time (~.timestamp.Timestamp):
+        end_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Time when the BatchPredictionJob entered any of
             the following states: ``JOB_STATE_SUCCEEDED``,
             ``JOB_STATE_FAILED``, ``JOB_STATE_CANCELLED``.
-        update_time (~.timestamp.Timestamp):
+        update_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Time when the BatchPredictionJob
             was most recently updated.
-        labels (Sequence[~.batch_prediction_job.BatchPredictionJob.LabelsEntry]):
+        labels (Sequence[google.cloud.aiplatform_v1beta1.types.BatchPredictionJob.LabelsEntry]):
             The labels with user-defined metadata to
             organize BatchPredictionJobs.
             Label keys and values can be no longer than 64
@@ -193,10 +193,10 @@ class BatchPredictionJob(proto.Message):
         expressed via any of them.
 
         Attributes:
-            gcs_source (~.io.GcsSource):
+            gcs_source (google.cloud.aiplatform_v1beta1.types.GcsSource):
                 The Google Cloud Storage location for the
                 input instances.
-            bigquery_source (~.io.BigQuerySource):
+            bigquery_source (google.cloud.aiplatform_v1beta1.types.BigQuerySource):
                 The BigQuery location of the input table.
                 The schema of the table should be in the format
                 described by the given context OpenAPI Schema,
@@ -229,7 +229,7 @@ class BatchPredictionJob(proto.Message):
         any of them.
 
         Attributes:
-            gcs_destination (~.io.GcsDestination):
+            gcs_destination (google.cloud.aiplatform_v1beta1.types.GcsDestination):
                 The Google Cloud Storage location of the directory where the
                 output is to be written to. In the given directory a new
                 directory is created. Its name is
@@ -256,7 +256,7 @@ class BatchPredictionJob(proto.Message):
                 per their schema, followed by an additional ``error`` field
                 which as value has ```google.rpc.Status`` <Status>`__
                 containing only ``code`` and ``message`` fields.
-            bigquery_destination (~.io.BigQueryDestination):
+            bigquery_destination (google.cloud.aiplatform_v1beta1.types.BigQueryDestination):
                 The BigQuery project location where the output is to be
                 written to. In the given project a new dataset is created
                 with name

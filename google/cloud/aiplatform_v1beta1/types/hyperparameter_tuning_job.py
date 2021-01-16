@@ -44,7 +44,7 @@ class HyperparameterTuningJob(proto.Message):
             HyperparameterTuningJob. The name can be up to
             128 characters long and can be consist of any
             UTF-8 characters.
-        study_spec (~.study.StudySpec):
+        study_spec (google.cloud.aiplatform_v1beta1.types.StudySpec):
             Required. Study configuration of the
             HyperparameterTuningJob.
         max_trial_count (int):
@@ -57,33 +57,33 @@ class HyperparameterTuningJob(proto.Message):
             seen before failing the HyperparameterTuningJob.
             If set to 0, AI Platform decides how many Trials
             must fail before the whole job fails.
-        trial_job_spec (~.custom_job.CustomJobSpec):
+        trial_job_spec (google.cloud.aiplatform_v1beta1.types.CustomJobSpec):
             Required. The spec of a trial job. The same
             spec applies to the CustomJobs created in all
             the trials.
-        trials (Sequence[~.study.Trial]):
+        trials (Sequence[google.cloud.aiplatform_v1beta1.types.Trial]):
             Output only. Trials of the
             HyperparameterTuningJob.
-        state (~.job_state.JobState):
+        state (google.cloud.aiplatform_v1beta1.types.JobState):
             Output only. The detailed state of the job.
-        create_time (~.timestamp.Timestamp):
+        create_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Time when the
             HyperparameterTuningJob was created.
-        start_time (~.timestamp.Timestamp):
+        start_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Time when the HyperparameterTuningJob for the
             first time entered the ``JOB_STATE_RUNNING`` state.
-        end_time (~.timestamp.Timestamp):
+        end_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Time when the HyperparameterTuningJob entered
             any of the following states: ``JOB_STATE_SUCCEEDED``,
             ``JOB_STATE_FAILED``, ``JOB_STATE_CANCELLED``.
-        update_time (~.timestamp.Timestamp):
+        update_time (google.protobuf.timestamp_pb2.Timestamp):
             Output only. Time when the
             HyperparameterTuningJob was most recently
             updated.
-        error (~.status.Status):
+        error (google.rpc.status_pb2.Status):
             Output only. Only populated when job's state is
             JOB_STATE_FAILED or JOB_STATE_CANCELLED.
-        labels (Sequence[~.hyperparameter_tuning_job.HyperparameterTuningJob.LabelsEntry]):
+        labels (Sequence[google.cloud.aiplatform_v1beta1.types.HyperparameterTuningJob.LabelsEntry]):
             The labels with user-defined metadata to
             organize HyperparameterTuningJobs.
             Label keys and values can be no longer than 64

@@ -217,8 +217,8 @@ from .specialist_pool_service import (
     UpdateSpecialistPoolOperationMetadata,
 )
 
-
 __all__ = (
+    "AcceleratorType",
     "UserActionReference",
     "Annotation",
     "AnnotationSpec",
@@ -239,6 +239,7 @@ __all__ = (
     "BigQuerySource",
     "BigQueryDestination",
     "ContainerRegistryDestination",
+    "JobState",
     "MachineSpec",
     "DedicatedResources",
     "AutomaticResources",
@@ -270,6 +271,7 @@ __all__ = (
     "PredictSchemata",
     "ModelContainerSpec",
     "Port",
+    "PipelineState",
     "TrainingPipeline",
     "InputDataConfig",
     "FractionSplit",

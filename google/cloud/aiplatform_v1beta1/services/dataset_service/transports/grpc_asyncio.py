@@ -137,10 +137,10 @@ class DatasetServiceGrpcAsyncIOTransport(DatasetServiceTransport):
                 for grpc channel. It is ignored if ``channel`` is provided.
             quota_project_id (Optional[str]): An optional project to use for billing
                 and quota.
-            client_info (google.api_core.gapic_v1.client_info.ClientInfo):
-                The client info used to send a user-agent string along with
-                API requests. If ``None``, then default info will be used.
-                Generally, you only need to set this if you're developing
+            client_info (google.api_core.gapic_v1.client_info.ClientInfo):	
+                The client info used to send a user-agent string along with	
+                API requests. If ``None``, then default info will be used.	
+                Generally, you only need to set this if you're developing	
                 your own client library.
 
         Raises:
@@ -194,6 +194,10 @@ class DatasetServiceGrpcAsyncIOTransport(DatasetServiceTransport):
                 ssl_credentials=ssl_credentials,
                 scopes=scopes or self.AUTH_SCOPES,
                 quota_project_id=quota_project_id,
+                options=[
+                    ("grpc.max_send_message_length", -1),
+                    ("grpc.max_receive_message_length", -1),
+                ],
             )
             self._ssl_channel_credentials = ssl_credentials
         else:
@@ -212,6 +216,10 @@ class DatasetServiceGrpcAsyncIOTransport(DatasetServiceTransport):
                 ssl_credentials=ssl_channel_credentials,
                 scopes=scopes or self.AUTH_SCOPES,
                 quota_project_id=quota_project_id,
+                options=[
+                    ("grpc.max_send_message_length", -1),
+                    ("grpc.max_receive_message_length", -1),
+                ],
             )
 
         # Run the base constructor.
@@ -225,6 +233,7 @@ class DatasetServiceGrpcAsyncIOTransport(DatasetServiceTransport):
         )
 
         self._stubs = {}
+        self._operations_client = None
 
     @property
     def grpc_channel(self) -> aio.Channel:
@@ -244,13 +253,13 @@ class DatasetServiceGrpcAsyncIOTransport(DatasetServiceTransport):
         client.
         """
         # Sanity check: Only create a new client if we do not already have one.
-        if "operations_client" not in self.__dict__:
-            self.__dict__["operations_client"] = operations_v1.OperationsAsyncClient(
+        if self._operations_client is None:
+            self._operations_client = operations_v1.OperationsAsyncClient(
                 self.grpc_channel
             )
 
         # Return the client from cache.
-        return self.__dict__["operations_client"]
+        return self._operations_client
 
     @property
     def create_dataset(

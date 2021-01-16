@@ -17,7 +17,7 @@
 
 import proto  # type: ignore
 
-# DO NOT OVERWRITE FOLLOWING LINE: it was manually edited.
+
 from google.cloud.aiplatform.v1beta1.schema.predict.instance import (
     TextSentimentPredictionInstance,
 )
@@ -35,9 +35,9 @@ class TextSentimentPredictionResult(proto.Message):
     integer values.
 
     Attributes:
-        instance (~.gcaspi_text_sentiment.TextSentimentPredictionInstance):
+        instance (google.cloud.aiplatform.v1beta1.schema.predict.instance.text_sentiment_pb2.TextSentimentPredictionInstance):
             User's input instance.
-        prediction (~.gcaspp_text_sentiment.TextSentimentPredictionResult.Prediction):
+        prediction (google.cloud.aiplatform.v1beta1.schema.predict.prediction_v1beta1.types.TextSentimentPredictionResult.Prediction):
             The prediction result.
     """
 

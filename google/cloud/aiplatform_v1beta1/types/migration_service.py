@@ -68,7 +68,7 @@ class SearchMigratableResourcesResponse(proto.Message):
     ``MigrationService.SearchMigratableResources``.
 
     Attributes:
-        migratable_resources (Sequence[~.gca_migratable_resource.MigratableResource]):
+        migratable_resources (Sequence[google.cloud.aiplatform_v1beta1.types.MigratableResource]):
             All migratable resources that can be migrated
             to the location specified in the request.
         next_page_token (str):
@@ -96,7 +96,7 @@ class BatchMigrateResourcesRequest(proto.Message):
         parent (str):
             Required. The location of the migrated resource will live
             in. Format: ``projects/{project}/locations/{location}``
-        migrate_resource_requests (Sequence[~.migration_service.MigrateResourceRequest]):
+        migrate_resource_requests (Sequence[google.cloud.aiplatform_v1beta1.types.MigrateResourceRequest]):
             Required. The request messages specifying the
             resources to migrate. They must be in the same
             location as the destination. Up to 50 resources
@@ -116,16 +116,16 @@ class MigrateResourceRequest(proto.Message):
     Platform.
 
     Attributes:
-        migrate_ml_engine_model_version_config (~.migration_service.MigrateResourceRequest.MigrateMlEngineModelVersionConfig):
+        migrate_ml_engine_model_version_config (google.cloud.aiplatform_v1beta1.types.MigrateResourceRequest.MigrateMlEngineModelVersionConfig):
             Config for migrating Version in
             ml.googleapis.com to AI Platform's Model.
-        migrate_automl_model_config (~.migration_service.MigrateResourceRequest.MigrateAutomlModelConfig):
+        migrate_automl_model_config (google.cloud.aiplatform_v1beta1.types.MigrateResourceRequest.MigrateAutomlModelConfig):
             Config for migrating Model in
             automl.googleapis.com to AI Platform's Model.
-        migrate_automl_dataset_config (~.migration_service.MigrateResourceRequest.MigrateAutomlDatasetConfig):
+        migrate_automl_dataset_config (google.cloud.aiplatform_v1beta1.types.MigrateResourceRequest.MigrateAutomlDatasetConfig):
             Config for migrating Dataset in
             automl.googleapis.com to AI Platform's Dataset.
-        migrate_data_labeling_dataset_config (~.migration_service.MigrateResourceRequest.MigrateDataLabelingDatasetConfig):
+        migrate_data_labeling_dataset_config (google.cloud.aiplatform_v1beta1.types.MigrateResourceRequest.MigrateDataLabelingDatasetConfig):
             Config for migrating Dataset in
             datalabeling.googleapis.com to AI Platform's
             Dataset.
@@ -211,7 +211,7 @@ class MigrateResourceRequest(proto.Message):
                 Optional. Display name of the Dataset in AI
                 Platform. System will pick a display name if
                 unspecified.
-            migrate_data_labeling_annotated_dataset_configs (Sequence[~.migration_service.MigrateResourceRequest.MigrateDataLabelingDatasetConfig.MigrateDataLabelingAnnotatedDatasetConfig]):
+            migrate_data_labeling_annotated_dataset_configs (Sequence[google.cloud.aiplatform_v1beta1.types.MigrateResourceRequest.MigrateDataLabelingDatasetConfig.MigrateDataLabelingAnnotatedDatasetConfig]):
                 Optional. Configs for migrating
                 AnnotatedDataset in datalabeling.googleapis.com
                 to AI Platform's SavedQuery. The specified
@@ -271,7 +271,7 @@ class BatchMigrateResourcesResponse(proto.Message):
     ``MigrationService.BatchMigrateResources``.
 
     Attributes:
-        migrate_resource_responses (Sequence[~.migration_service.MigrateResourceResponse]):
+        migrate_resource_responses (Sequence[google.cloud.aiplatform_v1beta1.types.MigrateResourceResponse]):
             Successfully migrated resources.
     """
 
@@ -288,7 +288,7 @@ class MigrateResourceResponse(proto.Message):
             Migrated Dataset's resource name.
         model (str):
             Migrated Model's resource name.
-        migratable_resource (~.gca_migratable_resource.MigratableResource):
+        migratable_resource (google.cloud.aiplatform_v1beta1.types.MigratableResource):
             Before migration, the identifier in
             ml.googleapis.com, automl.googleapis.com or
             datalabeling.googleapis.com.
@@ -308,7 +308,7 @@ class BatchMigrateResourcesOperationMetadata(proto.Message):
     ``MigrationService.BatchMigrateResources``.
 
     Attributes:
-        generic_metadata (~.operation.GenericOperationMetadata):
+        generic_metadata (google.cloud.aiplatform_v1beta1.types.GenericOperationMetadata):
             The common part of the operation metadata.
     """
 
