@@ -2592,7 +2592,7 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
         location: Optional[str] = None,
         credentials: Optional[auth_credentials.Credentials] = None,
     ):
-        """TODO(hardikv) Constructs a AutoML Tabular Training Job.
+        """Constructs a AutoML Forecasting Training Job.
 
         Args:
             display_name (str):
@@ -2930,7 +2930,7 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
             "transformations": self._column_transformations,
             "trainBudgetMilliNodeHours": budget_milli_node_hours,
             # optional inputs
-            "weightColumnName": weight_column,
+            "weightColumn": weight_column,
             "period": {
                 "unit": period_unit,
                 "quantity": period_count,
