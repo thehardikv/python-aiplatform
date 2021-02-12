@@ -2597,43 +2597,17 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
         Args:
             display_name (str):
                 Required. The user-defined name of this TrainingPipeline.
-            optimization_prediction_type (str):
-                The type of prediction the Model is to produce.
-                "classification" - Predict one out of multiple target values is
-                picked for each row.
-                "regression" - Predict a value based on its relation to other values.
-                This type is available only to columns that contain
-                semantically numeric values, i.e. integers or floating
-                point number, even if stored as e.g. strings.
-
             optimization_objective (str):
-                Optional. Objective function the Model is to be optimized towards. The training
-                task creates a Model that maximizes/minimizes the value of the objective
-                function over the validation set.
-
-                The supported optimization objectives depend on the prediction type, and
-                in the case of classification also the number of distinct values in the
-                target column (two distint values -> binary, 3 or more distinct values
-                -> multi class).
-                If the field is not set, the default objective function is used.
-
-                Classification (binary):
-                "maximize-au-roc" (default) - Maximize the area under the receiver
-                                            operating characteristic (ROC) curve.
-                "minimize-log-loss" - Minimize log loss.
-                "maximize-au-prc" - Maximize the area under the precision-recall curve.
-                "maximize-precision-at-recall" - Maximize precision for a specified
-                                                recall value.
-                "maximize-recall-at-precision" - Maximize recall for a specified
-                                                precision value.
-
-                Classification (multi class):
-                "minimize-log-loss" (default) - Minimize log loss.
-
-                Regression:
-                "minimize-rmse" (default) - Minimize root-mean-squared error (RMSE).
-                "minimize-mae" - Minimize mean-absolute error (MAE).
-                "minimize-rmsle" - Minimize root-mean-squared log error (RMSLE).
+                Optional. Objective function the model is to be optimized towards.
+            The training process creates a Model that optimizes the value of the objective
+            function over the validation set. The supported optimization objectives:
+            "minimize-rmse" (default) - Minimize root-mean-squared error (RMSE).
+            "minimize-mae" - Minimize mean-absolute error (MAE).
+            "minimize-rmsle" - Minimize root-mean-squared log error (RMSLE).
+            "minimize-rmspe" - Minimize root-mean-squared percentage error (RMSPE).
+            "minimize-wape-mae" - Minimize the combination of weighted absolute percentage error (WAPE)
+            and mean-absolute-error (MAE).
+            "minimize-quantile-loss" - Minimize the quantile loss at the defined quantiles.
             column_transformations (Optional[Union[Dict, List[Dict]]]):
                 Optional. Transformations to apply to the input columns (i.e. columns other
                 than the targetColumn). Each transformation may produce multiple
@@ -2643,17 +2617,6 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
                 If an input column has no transformations on it, such a column is
                 ignored by the training, except for the targetColumn, which should have
                 no transformations defined on.
-            optimization_objective_recall_value (float):
-                Optional. Required when maximize-precision-at-recall optimizationObjective was
-                picked, represents the recall value at which the optimization is done.
-
-                The minimum value is 0 and the maximum is 1.0.
-            optimization_objective_precision_value (float):
-                Optional. Required when maximize-recall-at-precision optimizationObjective was
-                picked, represents the precision value at which the optimization is
-                done.
-
-                The minimum value is 0 and the maximum is 1.0.
             project (str):
                 Optional. Project to run training in. Overrides project set in aiplatform.init.
             location (str):
@@ -2682,22 +2645,21 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
         forecast_window_end: int,
         period_unit: str,
         period_count: int,
-        training_fraction_split: float = 0.8,
-        validation_fraction_split: float = 0.1,
-        test_fraction_split: float = 0.1,
         predefined_split_column_name: Optional[str] = None,
         weight_column: Optional[str] = None,
         static_columns: List[str] = [],
         forecast_window_start: Optional[int] = None,
         past_horizon: Optional[int] = None,
-        export_evaluated_data_items_config: Optional[Dict[str, Union[str, bool]]] = None,
+        export_evaluated_data_items_config: Optional[
+            Dict[str, Union[str, bool]]
+        ] = None,
         quantiles: Optional[List[float]] = None,
         validation_options: Optional[str] = None,
         budget_milli_node_hours: int = 1000,
         model_display_name: Optional[str] = None,
         sync: bool = True,
     ) -> models.Model:
-        """TODO(hardikv) Runs the training job and returns a model.
+        """Runs the training job and returns a model.
 
         Data fraction splits:
         Any of ``training_fraction_split``, ``validation_fraction_split`` and
@@ -2715,15 +2677,14 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
                 [google.cloud.aiplatform.v1beta1.TrainingPipeline.training_task_definition].
                 For tabular Datasets, all their data is exported to
                 training, to pick and choose from.
-            training_fraction_split (float):
-                Required. The fraction of the input data that is to be
-                used to train the Model. This is ignored if Dataset is not provided.
-            validation_fraction_split (float):
-                Required. The fraction of the input data that is to be
-                used to validate the Model. This is ignored if Dataset is not provided.
-            test_fraction_split (float):
-                Required. The fraction of the input data that is to be
-                used to evaluate the Model. This is ignored if Dataset is not provided.
+            target_column (str):
+            time_column (str):
+            time_series_identifier_column (str):
+            time_variant_past_only_columns (List[str]):
+            time_variant_past_and_future_columns (List[str]):
+            forecast_window_end: (int):
+            period_unit (str):
+            period_count (int):
             predefined_split_column_name (str):
                 Optional. The key is a name of one of the Dataset's data
                 columns. The value of the key (either the label's value or
@@ -2741,6 +2702,14 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
                 10000 inclusively, and 0 value means that the row is ignored.
                 If the weight column field is not set, then all rows are assumed to have
                 equal weight of 1.
+            static_columns (List[str]):
+            forecast_window_start (int):
+            past_horizon (int):
+            export_evaluated_data_items_config: Optional[
+                Dict[str, Union[str, bool]]
+            ] = None,
+            quantiles: Optional[List[float]] = None,
+            validation_options: Optional[str] = None,
             budget_milli_node_hours (int):
                 Optional. The train budget of creating this Model, expressed in milli node
                 hours i.e. 1,000 value in this field means 1 node hour.
@@ -2759,12 +2728,6 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
                 of any UTF-8 characters.
 
                 If not provided upon creation, the job's display_name is used.
-            disable_early_stopping (bool):
-                Required. If true, the entire budget is used. This disables the early stopping
-                feature. By default, the early stopping feature is enabled, which means
-                that training might stop before the entire training budget has been
-                used, if further training does no longer brings significant improvement
-                to the model.
             sync (bool):
                 Whether to execute this method synchronously. If False, this method
                 will be executed in concurrent Future and any downstream object will
@@ -2793,9 +2756,6 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
             forecast_window_end=forecast_window_end,
             period_unit=period_unit,
             period_count=period_count,
-            training_fraction_split=training_fraction_split,
-            validation_fraction_split=validation_fraction_split,
-            test_fraction_split=test_fraction_split,
             predefined_split_column_name=predefined_split_column_name,
             weight_column=weight_column,
             static_columns=static_columns,
@@ -2809,8 +2769,6 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
             sync=sync,
         )
 
-
-
     @base.optional_sync()
     def _run(
         self,
@@ -2823,15 +2781,14 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
         forecast_window_end: int,
         period_unit: str,
         period_count: int,
-        training_fraction_split: float = 0.8,
-        validation_fraction_split: float = 0.1,
-        test_fraction_split: float = 0.1,
         predefined_split_column_name: Optional[str] = None,
         weight_column: Optional[str] = None,
         static_columns: List[str] = [],
         forecast_window_start: Optional[int] = None,
         past_horizon: Optional[int] = None,
-        export_evaluated_data_items_config: Optional[Dict[str, Union[str, bool]]] = None,
+        export_evaluated_data_items_config: Optional[
+            Dict[str, Union[str, bool]]
+        ] = None,
         quantiles: Optional[List[float]] = None,
         validation_options: Optional[str] = None,
         budget_milli_node_hours: int = 1000,
@@ -2856,15 +2813,6 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
                 [google.cloud.aiplatform.v1beta1.TrainingPipeline.training_task_definition].
                 For tabular Datasets, all their data is exported to
                 training, to pick and choose from.
-            training_fraction_split (float):
-                Required. The fraction of the input data that is to be
-                used to train the Model. This is ignored if Dataset is not provided.
-            validation_fraction_split (float):
-                Required. The fraction of the input data that is to be
-                used to validate the Model. This is ignored if Dataset is not provided.
-            test_fraction_split (float):
-                Required. The fraction of the input data that is to be
-                used to evaluate the Model. This is ignored if Dataset is not provided.
             predefined_split_column_name (str):
                 Optional. The key is a name of one of the Dataset's data
                 columns. The value of the key (either the label's value or
@@ -2927,10 +2875,7 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
             "timeVariantPastOnlyColumns": time_variant_past_only_columns,
             "timeVariantPastAndFutureColumns": time_variant_past_and_future_columns,
             "forecastWindowEnd": forecast_window_end,
-            "period": {
-                "unit": period_unit,
-                "quantity": period_count,
-            },
+            "period": {"unit": period_unit, "quantity": period_count,},
             "transformations": self._column_transformations,
             "trainBudgetMilliNodeHours": budget_milli_node_hours,
             # optional inputs
@@ -2940,7 +2885,7 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
             "exportEvaluatedDataItemsConfig": export_evaluated_data_items_config,
             "quantiles": quantiles,
             "validationOptions": validation_options,
-            "optimizationObjective": self._optimization_objective
+            "optimizationObjective": self._optimization_objective,
         }
 
         if model_display_name is None:
@@ -2952,9 +2897,9 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
             training_task_definition=training_task_definition,
             training_task_inputs=training_task_inputs_dict,
             dataset=dataset,
-            training_fraction_split=training_fraction_split,
-            validation_fraction_split=validation_fraction_split,
-            test_fraction_split=test_fraction_split,
+            training_fraction_split=0.8,
+            validation_fraction_split=0.1,
+            test_fraction_split=0.1,
             predefined_split_column_name=predefined_split_column_name,
             model=model,
         )
@@ -2966,6 +2911,7 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
             f"Training Pipeline {self.resource_name} is not configured to upload a "
             "Model."
         )
+
 
 class AutoMLImageTrainingJob(_TrainingJob):
     def __init__(

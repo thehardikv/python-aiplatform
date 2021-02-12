@@ -92,9 +92,9 @@ _TEST_TRAINING_TASK_INPUTS = json_format.ParseDict(
 _TEST_DATASET_NAME = "test-dataset-name"
 
 _TEST_MODEL_DISPLAY_NAME = "model-display-name"
-_TEST_TRAINING_FRACTION_SPLIT = 0.6
-_TEST_VALIDATION_FRACTION_SPLIT = 0.2
-_TEST_TEST_FRACTION_SPLIT = 0.2
+_TEST_TRAINING_FRACTION_SPLIT = 0.8
+_TEST_VALIDATION_FRACTION_SPLIT = 0.1
+_TEST_TEST_FRACTION_SPLIT = 0.1
 _TEST_PREDEFINED_SPLIT_COLUMN_NAME = "split"
 
 _TEST_OUTPUT_PYTHON_PACKAGE_PATH = "gs://test/ouput/python/trainer.tar.gz"
@@ -214,9 +214,6 @@ class TestAutoMLForecastingTrainingJob:
             period_unit=_TEST_TRAINING_PERIOD_UNIT,
             period_count=_TEST_TRAINING_PERIOD_COUNT,
             model_display_name=_TEST_MODEL_DISPLAY_NAME,
-            training_fraction_split=_TEST_TRAINING_FRACTION_SPLIT,
-            validation_fraction_split=_TEST_VALIDATION_FRACTION_SPLIT,
-            test_fraction_split=_TEST_TEST_FRACTION_SPLIT,
             predefined_split_column_name=_TEST_PREDEFINED_SPLIT_COLUMN_NAME,
             weight_column=_TEST_TRAINING_WEIGHT_COLUMN,
             static_columns=_TEST_TRAINING_STATIC_COLUMNS,
@@ -299,9 +296,6 @@ class TestAutoMLForecastingTrainingJob:
             forecast_window_end=_TEST_TRAINING_FORECAST_WINDOW_END,
             period_unit=_TEST_TRAINING_PERIOD_UNIT,
             period_count=_TEST_TRAINING_PERIOD_COUNT,
-            training_fraction_split=_TEST_TRAINING_FRACTION_SPLIT,
-            validation_fraction_split=_TEST_VALIDATION_FRACTION_SPLIT,
-            test_fraction_split=_TEST_TEST_FRACTION_SPLIT,
             weight_column=_TEST_TRAINING_WEIGHT_COLUMN,
             static_columns=_TEST_TRAINING_STATIC_COLUMNS,
             forecast_window_start=_TEST_TRAINING_FORECAST_WINDOW_START,
@@ -369,9 +363,6 @@ class TestAutoMLForecastingTrainingJob:
             period_unit=_TEST_TRAINING_PERIOD_UNIT,
             period_count=_TEST_TRAINING_PERIOD_COUNT,
             model_display_name=_TEST_MODEL_DISPLAY_NAME,
-            training_fraction_split=_TEST_TRAINING_FRACTION_SPLIT,
-            validation_fraction_split=_TEST_VALIDATION_FRACTION_SPLIT,
-            test_fraction_split=_TEST_TEST_FRACTION_SPLIT,
             weight_column=_TEST_TRAINING_WEIGHT_COLUMN,
             static_columns=_TEST_TRAINING_STATIC_COLUMNS,
             forecast_window_start=_TEST_TRAINING_FORECAST_WINDOW_START,
@@ -395,9 +386,6 @@ class TestAutoMLForecastingTrainingJob:
                 period_unit=_TEST_TRAINING_PERIOD_UNIT,
                 period_count=_TEST_TRAINING_PERIOD_COUNT,
                 model_display_name=_TEST_MODEL_DISPLAY_NAME,
-                training_fraction_split=_TEST_TRAINING_FRACTION_SPLIT,
-                validation_fraction_split=_TEST_VALIDATION_FRACTION_SPLIT,
-                test_fraction_split=_TEST_TEST_FRACTION_SPLIT,
                 weight_column=_TEST_TRAINING_WEIGHT_COLUMN,
                 static_columns=_TEST_TRAINING_STATIC_COLUMNS,
                 forecast_window_start=_TEST_TRAINING_FORECAST_WINDOW_START,
@@ -411,7 +399,10 @@ class TestAutoMLForecastingTrainingJob:
 
     @pytest.mark.parametrize("sync", [True, False])
     def test_run_raises_if_pipeline_fails(
-        self, mock_pipeline_service_create_and_get_with_fail, mock_dataset_timeseries, sync
+        self,
+        mock_pipeline_service_create_and_get_with_fail,
+        mock_dataset_timeseries,
+        sync,
     ):
 
         aiplatform.init(project=_TEST_PROJECT, staging_bucket=_TEST_BUCKET_NAME)
@@ -434,9 +425,6 @@ class TestAutoMLForecastingTrainingJob:
                 period_unit=_TEST_TRAINING_PERIOD_UNIT,
                 period_count=_TEST_TRAINING_PERIOD_COUNT,
                 model_display_name=_TEST_MODEL_DISPLAY_NAME,
-                training_fraction_split=_TEST_TRAINING_FRACTION_SPLIT,
-                validation_fraction_split=_TEST_VALIDATION_FRACTION_SPLIT,
-                test_fraction_split=_TEST_TEST_FRACTION_SPLIT,
                 weight_column=_TEST_TRAINING_WEIGHT_COLUMN,
                 static_columns=_TEST_TRAINING_STATIC_COLUMNS,
                 forecast_window_start=_TEST_TRAINING_FORECAST_WINDOW_START,
