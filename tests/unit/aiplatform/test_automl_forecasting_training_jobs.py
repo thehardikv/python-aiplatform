@@ -37,12 +37,11 @@ _TEST_TRAINING_CONTAINER_IMAGE = "gcr.io/test-training/container:image"
 _TEST_METADATA_SCHEMA_URI_TIMESERIES = schema.dataset.metadata.time_series
 _TEST_METADATA_SCHEMA_URI_NONTIMESERIES = schema.dataset.metadata.image
 
-# TODO(hardikv)
 _TEST_TRAINING_COLUMN_TRANSFORMATIONS = [
-    {"auto": {"column_name": "sepal_width"}},
-    {"auto": {"column_name": "sepal_length"}},
-    {"auto": {"column_name": "petal_length"}},
-    {"auto": {"column_name": "petal_width"}},
+    {"auto": {"column_name": "time"}},
+    {"auto": {"column_name": "time_series_identifier"}},
+    {"auto": {"column_name": "target"}},
+    {"auto": {"column_name": "weight"}},
 ]
 _TEST_TRAINING_TARGET_COLUMN = "target"
 _TEST_TRAINING_TIME_COLUMN = "time"
@@ -55,7 +54,9 @@ _TEST_TRAINING_PERIOD_UNIT = "day"
 _TEST_TRAINING_PERIOD_COUNT = 1
 _TEST_TRAINING_FORECAST_WINDOW_START = None
 _TEST_TRAINING_PAST_HORIZON = None
-_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_CONFIG = None
+_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS = True
+_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_BIGQUERY_DESTINATION_URI = "bq://path.to.table"
+_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_OVERRIDE_DESTINATION = False
 _TEST_TRAINING_QUANTILES = None
 _TEST_TRAINING_VALIDATION_OPTIONS = None
 _TEST_TRAINING_BUDGET_MILLI_NODE_HOURS = 1000
@@ -81,7 +82,10 @@ _TEST_TRAINING_TASK_INPUTS = json_format.ParseDict(
         "weightColumn": _TEST_TRAINING_WEIGHT_COLUMN,
         "forecastWindowStart": _TEST_TRAINING_FORECAST_WINDOW_START,
         "pastHorizon": _TEST_TRAINING_PAST_HORIZON,
-        "exportEvaluatedDataItemsConfig": _TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_CONFIG,
+        "exportEvaluatedDataItemsConfig": {
+            "destinationBigqueryUri": _TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_BIGQUERY_DESTINATION_URI,
+            "overrideExistingTable": _TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_OVERRIDE_DESTINATION
+        },
         "quantiles": _TEST_TRAINING_QUANTILES,
         "validationOptions": _TEST_TRAINING_VALIDATION_OPTIONS,
         "optimizationObjective": _TEST_TRAINING_OPTIMIZATION_OBJECTIVE_NAME,
@@ -220,7 +224,9 @@ class TestAutoMLForecastingTrainingJob:
             forecast_window_start=_TEST_TRAINING_FORECAST_WINDOW_START,
             past_horizon=_TEST_TRAINING_PAST_HORIZON,
             budget_milli_node_hours=_TEST_TRAINING_BUDGET_MILLI_NODE_HOURS,
-            export_evaluated_data_items_config=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_CONFIG,
+            export_evaluated_data_items=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS,
+            export_evaluated_data_items_bigquery_destination_uri=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_BIGQUERY_DESTINATION_URI,
+            export_evaluated_data_items_override_destination=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_OVERRIDE_DESTINATION,
             quantiles=_TEST_TRAINING_QUANTILES,
             validation_options=_TEST_TRAINING_VALIDATION_OPTIONS,
             sync=sync,
@@ -301,7 +307,9 @@ class TestAutoMLForecastingTrainingJob:
             forecast_window_start=_TEST_TRAINING_FORECAST_WINDOW_START,
             past_horizon=_TEST_TRAINING_PAST_HORIZON,
             budget_milli_node_hours=_TEST_TRAINING_BUDGET_MILLI_NODE_HOURS,
-            export_evaluated_data_items_config=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_CONFIG,
+            export_evaluated_data_items=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS,
+            export_evaluated_data_items_bigquery_destination_uri=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_BIGQUERY_DESTINATION_URI,
+            export_evaluated_data_items_override_destination=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_OVERRIDE_DESTINATION,
             quantiles=_TEST_TRAINING_QUANTILES,
             validation_options=_TEST_TRAINING_VALIDATION_OPTIONS,
             sync=sync,
@@ -368,7 +376,9 @@ class TestAutoMLForecastingTrainingJob:
             forecast_window_start=_TEST_TRAINING_FORECAST_WINDOW_START,
             past_horizon=_TEST_TRAINING_PAST_HORIZON,
             budget_milli_node_hours=_TEST_TRAINING_BUDGET_MILLI_NODE_HOURS,
-            export_evaluated_data_items_config=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_CONFIG,
+            export_evaluated_data_items=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS,
+            export_evaluated_data_items_bigquery_destination_uri=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_BIGQUERY_DESTINATION_URI,
+            export_evaluated_data_items_override_destination=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_OVERRIDE_DESTINATION,
             quantiles=_TEST_TRAINING_QUANTILES,
             validation_options=_TEST_TRAINING_VALIDATION_OPTIONS,
             sync=sync,
@@ -391,7 +401,9 @@ class TestAutoMLForecastingTrainingJob:
                 forecast_window_start=_TEST_TRAINING_FORECAST_WINDOW_START,
                 past_horizon=_TEST_TRAINING_PAST_HORIZON,
                 budget_milli_node_hours=_TEST_TRAINING_BUDGET_MILLI_NODE_HOURS,
-                export_evaluated_data_items_config=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_CONFIG,
+                export_evaluated_data_items=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS,
+                export_evaluated_data_items_bigquery_destination_uri=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_BIGQUERY_DESTINATION_URI,
+                export_evaluated_data_items_override_destination=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_OVERRIDE_DESTINATION,
                 quantiles=_TEST_TRAINING_QUANTILES,
                 validation_options=_TEST_TRAINING_VALIDATION_OPTIONS,
                 sync=sync,
@@ -430,7 +442,9 @@ class TestAutoMLForecastingTrainingJob:
                 forecast_window_start=_TEST_TRAINING_FORECAST_WINDOW_START,
                 past_horizon=_TEST_TRAINING_PAST_HORIZON,
                 budget_milli_node_hours=_TEST_TRAINING_BUDGET_MILLI_NODE_HOURS,
-                export_evaluated_data_items_config=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_CONFIG,
+                export_evaluated_data_items=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS,
+                export_evaluated_data_items_bigquery_destination_uri=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_BIGQUERY_DESTINATION_URI,
+                export_evaluated_data_items_override_destination=_TEST_TRAINING_EXPORT_EVALUATED_DATA_ITEMS_OVERRIDE_DESTINATION,
                 quantiles=_TEST_TRAINING_QUANTILES,
                 validation_options=_TEST_TRAINING_VALIDATION_OPTIONS,
                 sync=sync,
