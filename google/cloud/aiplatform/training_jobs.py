@@ -2686,7 +2686,8 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
                 (the window of future values to predict, relative to the present.), where each period is one unit
                 of granularity as defined by [period]. Inclusive.
             period_unit (str):
-                Required. The time granularity unit of this time period.
+                Required. The time granularity unit of this time period. Accepted values are ``minute``,
+                ``hour``, ``day``, ``week``, ``month``, ``year``.
             period_count (int):
                 Required. The number of units per period, e.g. 3 weeks or 2 months.
             predefined_split_column_name (str):
@@ -2872,7 +2873,8 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
                 (the window of future values to predict, relative to the present.), where each period is one unit
                 of granularity as defined by [period]. Inclusive.
             period_unit (str):
-                Required. The time granularity unit of this time period.
+                Required. The time granularity unit of this time period. Accepted values are ``minute``,
+                ``hour``, ``day``, ``week``, ``month``, ``year``.
             period_count (int):
                 Required. The number of units per period, e.g. 3 weeks or 2 months.
             predefined_split_column_name (str):
