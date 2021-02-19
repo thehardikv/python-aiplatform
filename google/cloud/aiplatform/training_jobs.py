@@ -2715,8 +2715,9 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
                 unit of granularity as defined by [period]. Inclusive.
             past_horizon (int):
                 Optional. The number of periods offset into the past to restrict past sequence, where each
-                period is one unit of granularity as defined by [period]. Default value 0 means that it lets
-                algorithm to define the value. Inclusive.
+                period is one unit of granularity as defined by [period]. When not provided uses the
+                default value of 0 which means the model sets each series historical window to be 0 (also
+                known as "cold start"). Inclusive.
             export_evaluated_data_items (bool):
                 Whether to export the test set predictions to a BigQuery table.
                 If False, then the export is not performed.
@@ -2900,8 +2901,9 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
                 unit of granularity as defined by [period]. Inclusive.
             past_horizon (int):
                 Optional. The number of periods offset into the past to restrict past sequence, where each
-                period is one unit of granularity as defined by [period]. Default value 0 means that it lets
-                algorithm to define the value. Inclusive.
+                period is one unit of granularity as defined by [period]. When not provided uses the
+                default value of 0 which means the model sets each series historical window to be 0 (also
+                known as "cold start"). Inclusive.
             export_evaluated_data_items (bool):
                 Whether to export the test set predictions to a BigQuery table.
                 If False, then the export is not performed.
@@ -2988,7 +2990,7 @@ class AutoMLForecastingTrainingJob(_TrainingJob):
         if export_evaluated_data_items:
             training_task_inputs_dict["exportEvaluatedDataItemsConfig"] = {
                 "destinationBigqueryUri": export_evaluated_data_items_bigquery_destination_uri,
-                "overrideExistingTable": export_evaluated_data_items_override_destination
+                "overrideExistingTable": export_evaluated_data_items_override_destination,
             }
 
         if model_display_name is None:
