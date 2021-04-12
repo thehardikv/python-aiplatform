@@ -15,15 +15,18 @@
 # limitations under the License.
 #
 
-from google.cloud.aiplatform.datasets.dataset import Dataset
+from google.cloud.aiplatform.datasets.dataset import _Dataset
 from google.cloud.aiplatform.datasets.tabular_dataset import TabularDataset
+from google.cloud.aiplatform.datasets.time_series_dataset import TimeSeriesDataset
 from google.cloud.aiplatform.datasets.image_dataset import ImageDataset
 from google.cloud.aiplatform.datasets.text_dataset import TextDataset
 from google.cloud.aiplatform.datasets.video_dataset import VideoDataset
 
+
 __all__ = (
-    "Dataset",
+    "_Dataset",
     "TabularDataset",
+    "TimeSeriesDataset",
     "ImageDataset",
     "TextDataset",
     "VideoDataset",
